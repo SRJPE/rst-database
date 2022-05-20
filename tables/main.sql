@@ -2,24 +2,21 @@ CREATE TYPE states_enum AS ENUM ('CA', 'OR', 'WA');
 
 --- look up tables
 CREATE TABLE IF NOT EXISTS visit_type (
-    id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY, 
-    code VARCHAR(50) UNIQUE,
+    code VARCHAR(50) PRIMARY KEY,
     description VARCHAR(50), 
     created_at TIMESTAMP,
     updated_at TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS taxon (
-    id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY, 
-    code VARCHAR(50) UNIQUE,
+    code VARCHAR(50) PRIMARY KEY,
     description VARCHAR(50), 
     created_at TIMESTAMP,
     updated_at TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS agency (
-    id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY, 
-    code VARCHAR(50) UNIQUE,
+    code VARCHAR(50) PRIMARY KEY,
     description VARCHAR(50), 
     created_at TIMESTAMP,
     updated_at TIMESTAMP
@@ -27,48 +24,42 @@ CREATE TABLE IF NOT EXISTS agency (
 
 --- TODO: implement these, or decide if better off as enums
 CREATE TABLE IF NOT EXISTS sample_gear (
-    id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY, 
-    code VARCHAR(50) UNIQUE,
+    code VARCHAR(50) PRIMARY KEY,
     description VARCHAR(50), 
     created_at TIMESTAMP,
     updated_at TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS light_condition (
-    id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY, 
-    code VARCHAR(50) UNIQUE,
+    code VARCHAR(50) PRIMARY KEY,
     description VARCHAR(50), 
     created_at TIMESTAMP,
     updated_at TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS trap_funcionality (
-    id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY, 
-    code VARCHAR(50) UNIQUE,
+    code VARCHAR(50) PRIMARY KEY,
     description VARCHAR(50), 
     created_at TIMESTAMP,
     updated_at TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS fish_processed (
-    id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY, 
-    code VARCHAR(50) UNIQUE,
+    code VARCHAR(50) PRIMARY KEY,
     description VARCHAR(50), 
     created_at TIMESTAMP,
     updated_at TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS run (
-    id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY, 
-    code VARCHAR(50) UNIQUE,
+    code VARCHAR(50) PRIMARY KEY,
     description VARCHAR(50), 
     created_at TIMESTAMP,
     updated_at TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS run_code_method (
-    id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY, 
-    code VARCHAR(50) UNIQUE,
+    code VARCHAR(50) PRIMARY KEY,
     description VARCHAR(50), 
     created_at TIMESTAMP,
     updated_at TIMESTAMP
@@ -76,48 +67,42 @@ CREATE TABLE IF NOT EXISTS run_code_method (
 
 
 CREATE TABLE IF NOT EXISTS life_stage (
-    id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY, 
-    code VARCHAR(50) UNIQUE,
+    code VARCHAR(50) PRIMARY KEY,
     description VARCHAR(50), 
     created_at TIMESTAMP,
     updated_at TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS release_purpose (
-    id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY, 
-    code VARCHAR(50) UNIQUE,
+    code VARCHAR(50) PRIMARY KEY,
     description VARCHAR(50), 
     created_at TIMESTAMP,
     updated_at TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS fish_origin (
-    id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY, 
-    code VARCHAR(50) UNIQUE,
+    code VARCHAR(50) PRIMARY KEY,
     description VARCHAR(50), 
     created_at TIMESTAMP,
     updated_at TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS mark_type (
-    id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY, 
-    code VARCHAR(50) UNIQUE,
+    code VARCHAR(50) PRIMARY KEY,
     description VARCHAR(50), 
     created_at TIMESTAMP,
     updated_at TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS mark_color (
-    id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY, 
-    code VARCHAR(50) UNIQUE,
+    code VARCHAR(50) PRIMARY KEY,
     description VARCHAR(50), 
     created_at TIMESTAMP,
     updated_at TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS body_part (
-    id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY, 
-    code VARCHAR(50) UNIQUE,
+    code VARCHAR(50) PRIMARY KEY,
     description VARCHAR(50), 
     created_at TIMESTAMP,
     updated_at TIMESTAMP
@@ -131,60 +116,35 @@ CREATE TABLE IF NOT EXISTS site (
     data_recorder VARCHAR(50),
     data_recorder_agency VARCHAR(100) REFERENCES agency (code),
     site_abbrv VARCHAR(50),
-    -- site_id int,
-    start_operation_date DATE, -- is this correct?
-    end_operation_date DATE, -- is this correct?
+    start_operation_date DATE,
+    end_operation_date DATE,
     stream_name VARCHAR(100),
     river_mile DECIMAL,
-    -- trib_to varchar,
+    trib_leads_to VARCHAR(50),
     state states_enum,
-    -- coord GEOMETRY(POINT, 4326),
-    -- src_x_coord <type>,
-    -- src_y_coord <type>,
-    -- coordinate_system VARCHAR(50),
-    -- ll_source varchar,
-    -- src_datum varchar,
-    -- src_projection varchar,
-    -- x_coord <type>,
-    -- y_coord <type>,
-    -- coord_systm <type>,
-    -- datum varchar,
-    -- projection varchar,
+    raw_x_coord NUMERIC,
+    raw_y_coord NUMERIC,
+    raw_coord_system VARCHAR(50),
+    raw_coord_method VARCHAR(50),
+    raw_datum VARCHAR(50),
+    raw_projection VARCHAR(50),
+    x_coord NUMERIC,
+    y_coord NUMERIC,
+    coord_system VARCHAR(50),
+    coord_method VARCHAR(50),
+    datum VARCHAR(50),
+    projection VARCHAR(50),
     -- georef_qa_status varchar,
-    -- realtive varchar,
-    -- usgs_station_num int,
-    -- discharge_url varchar,
+    -- relative varchar,
+    usgs_station_num VARCHAR(15),
     comments VARCHAR(500),
     active_id INTEGER,
     created_at TIMESTAMP,
     updated_at TIMESTAMP
 );
 
- 
-CREATE TABLE IF NOT EXISTS projects (
-    id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    name VARCHAR(100), 
-    contact_name VARCHAR(100), 
-    contact_agency VARCHAR(50),
-    contact_telephone VARCHAR(50),
-    contact_email VARCHAR(100),
-    contact_address VARCHAR(250), 
-    contact_city VARCHAR(50),
-    contact_state states_enum,
-    contact_zip VARCHAR(20),
-    data_contact_name VARCHAR(100), 
-    data_contact_telephone VARCHAR(50),
-    data_contact_email VARCHAR(100),
-    initial_data_year INT, 
-    comments VARCHAR(500),
-    active_id INTEGER,
-    data_recorder VARCHAR(50),
-    data_recorder_agency VARCHAR(100) REFERENCES agency (code),
-    created_at TIMESTAMP,
-    updated_at TIMESTAMP 
-);
-
 CREATE TABLE IF NOT EXISTS project_description (
+    id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     project_name VARCHAR(20),
     project_desc VARCHAR(50),
     main_contact_name VARCHAR(100),
@@ -210,8 +170,9 @@ CREATE TABLE IF NOT EXISTS project_description (
 
 CREATE TABLE IF NOT EXISTS trap_visit (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    project_id INTEGER REFERENCES projects, 
+    project_id INTEGER REFERENCES project_description, 
     visit_type_code VARCHAR(50) REFERENCES visit_type (code),
+    trap_visit_time TIMESTAMP,
     fish_processed_code VARCHAR(50) REFERENCES fish_processed (code),
     crew_id VARCHAR(50),
     sample_gear_code VARCHAR(50) REFERENCES sample_gear (code),
@@ -231,7 +192,7 @@ CREATE TABLE IF NOT EXISTS trap_visit (
 
 CREATE TABLE IF NOT EXISTS release (
   id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-  project_id INTEGER REFERENCES projects,
+  project_id INTEGER REFERENCES project_description,
   release_purpose_code VARCHAR(50) REFERENCES release_purpose (code),
   source_of_fish_site_id INTEGER REFERENCES site,
   release_site_id INTEGER REFERENCES site,
@@ -247,7 +208,7 @@ CREATE TABLE IF NOT EXISTS release (
 
 CREATE TABLE IF NOT EXISTS catch_raw (
     catch_raw_id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    project_id INTEGER REFERENCES projects,
+    project_id INTEGER REFERENCES project_description,
     trap_visit_id INTEGER REFERENCES trap_visit,
     taxon_code VARCHAR(50) REFERENCES taxon (code),
     capture_run_code VARCHAR(50) REFERENCES run (code),
@@ -275,7 +236,7 @@ CREATE TABLE IF NOT EXISTS catch_raw (
 
 CREATE TABLE IF NOT EXISTS release_fish (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    project_id INTEGER REFERENCES projects,
+    project_id INTEGER REFERENCES project_description,
     release_id INTEGER REFERENCES release,
     fork_length DECIMAL,
     weight DECIMAL,
@@ -293,7 +254,7 @@ CREATE TABLE IF NOT EXISTS release_fish (
 
 CREATE TABLE IF NOT EXISTS mark_applied (
   id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-  project_id INTEGER REFERENCES projects,
+  project_id INTEGER REFERENCES project_description,
   release_id INTEGER REFERENCES release,
   applied_mark_type VARCHAR(50) REFERENCES mark_type (code),
   applied_mark_color VARCHAR(50) REFERENCES mark_color (code),
@@ -310,7 +271,7 @@ CREATE TABLE IF NOT EXISTS mark_applied (
 
 CREATE TABLE IF NOT EXISTS mark_existing (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,   
-    project_id INTEGER REFERENCES projects,
+    project_id INTEGER REFERENCES project_description,
     mark_type_code VARCHAR(50) REFERENCES mark_type (code),
     mark_color_code VARCHAR(50) REFERENCES mark_color (code),
     mark_position_id INTEGER,
