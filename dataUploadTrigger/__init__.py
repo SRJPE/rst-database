@@ -41,8 +41,20 @@ def main(myblob: func.InputStream):
     # read in the data 
     data = StringIO(blob_string) 
     df=pd.read_csv(data)
+    dict=df.to_dict('index')
+    payload=[]
+    for key in dict:
+        payload.append(dict[key])
 
     engine = create_rst_engine()
+
+    with engine.connect() as conn:
+        metadata_obj = MetaData()
+        metadata_obj.reflect(bind=conn)
+        visit_type = metadata_obj.tables['visit_type']
+        conn.execute(visit_type.insert(), payload)
+
+    
 
     # detect what kind of data this is and where it should go in the db
     df.to_sql('visit_type', con=engine, index=False, if_exists='replace', method='multi')
@@ -52,6 +64,3 @@ def main(myblob: func.InputStream):
 
 
 
-# metadata_obj = MetaData()
-# metadata_obj.reflect(bind=engine)
-# visit_type = metadata_obj.tables['visit_type']
