@@ -53,14 +53,3 @@ def main(myblob: func.InputStream):
         metadata_obj.reflect(bind=conn)
         visit_type = metadata_obj.tables['visit_type']
         conn.execute(visit_type.insert(), payload)
-
-    
-
-    # detect what kind of data this is and where it should go in the db
-    df.to_sql('visit_type', con=engine, index=False, if_exists='replace', method='multi')
-    
-
-    logging.info(f"{df}\n")
-
-
-
