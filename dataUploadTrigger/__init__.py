@@ -45,7 +45,7 @@ def main(myblob: func.InputStream):
     engine = create_rst_engine()
 
     # detect what kind of data this is and where it should go in the db
-    df.to_sql('visit_type', con=engine, index=False, if_exists='fail', method='multi')
+    df.to_sql('visit_type', con=engine, index=False, if_exists='replace', method='multi')
     
 
     logging.info(f"{df}\n")
