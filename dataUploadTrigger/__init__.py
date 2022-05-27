@@ -39,6 +39,8 @@ def main(myblob: func.InputStream):
     blob_string = str(myblob.read(),'utf-8')
 
     # read in the data 
+    file_name = os.path.basename(myblob.name)
+    table_name = file_name.replace('.csv', '')
     data = StringIO(blob_string) 
     df=pd.read_csv(data)
     dict=df.to_dict('index')
@@ -53,3 +55,5 @@ def main(myblob: func.InputStream):
         metadata_obj.reflect(bind=conn)
         visit_type = metadata_obj.tables['visit_type']
         conn.execute(visit_type.insert(), payload)
+        # table = metadata_obj.tables[table_name]
+        # conn.execute(table.insert(), payload)
