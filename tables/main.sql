@@ -172,15 +172,15 @@ CREATE TABLE IF NOT EXISTS trap_visit (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     project_id INTEGER REFERENCES project_description, 
     visit_type_code VARCHAR(50) REFERENCES visit_type (code),
-    trap_visit_time TIMESTAMP,
+    visit_datetime_start TIMESTAMP,
+    visit_datetime_stop TIMESTAMP,
     fish_processed_code VARCHAR(50) REFERENCES fish_processed (code),
-    crew_id VARCHAR(50),
-    sample_gear_code VARCHAR(50) REFERENCES sample_gear (code),
+    crew VARCHAR(50), --- this will be an array of FK's
+    sample_gear_code VARCHAR(50) REFERENCES sample_gear (code), -- change to equipment_code
     trap_in_thalweg BOOlEAN,
     trap_functioning_code VARCHAR(50) REFERENCES trap_funcionality (code),
-    counter_at_end INTEGER,
-    rpm_revolution_at_start INTEGER,
-    rpm_revolution_at_end INTEGER,
+    revolutions_at_start INTEGER,
+    revolutions_at_stop INTEGER,
     in_half_cone_configuration BOOLEAN,
     debris_volume_code VARCHAR(50),
     created_at TIMESTAMP,
@@ -193,17 +193,18 @@ CREATE TABLE IF NOT EXISTS trap_visit (
 CREATE TABLE IF NOT EXISTS release (
   id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
   project_id INTEGER REFERENCES project_description,
-  release_purpose_code VARCHAR(50) REFERENCES release_purpose (code),
+  release_purpose_id VARCHAR(50) REFERENCES release_purpose (code),
   source_of_fish_site_id INTEGER REFERENCES site,
   release_site_id INTEGER REFERENCES site,
   time_of_check TIMESTAMP,
   num_fish_dead_at_handling INTEGER,
   num_fish_dead_at_holding INTEGER,
   num_fish_released INTEGER,
-  released_at TIMESTAMP,
+  released_datetime TIMESTAMP,
   release_light_condition VARCHAR(50) REFERENCES light_condition (code),
   created_at TIMESTAMP, 
-  updated_at TIMESTAMP
+  updated_at TIMESTAMP, 
+  --- add release crew columns
 );
 
 CREATE TABLE IF NOT EXISTS catch_raw (
@@ -215,20 +216,22 @@ CREATE TABLE IF NOT EXISTS catch_raw (
     capture_run_code_method VARCHAR(50) REFERENCES run_code_method (code) ,
     final_run_class VARCHAR(100) REFERENCES run (code),
     final_run_class_method VARCHAR(100) REFERENCES run_code_method (code),
-    fish_origin_code VARCHAR(50) REFERENCES fish_origin (code),
+    -- fish_origin_code VARCHAR(50) REFERENCES fish_origin (code),
+    adipose_clipped BOOLEAN, 
     life_stage_code VARCHAR(50) REFERENCES life_stage (code),
+    life_stage_code_method VARCHAR(50) REFERENCES FIX_ME,
     fork_length DECIMAL,
     total_length DECIMAL,
     weight DECIMAL,
     num_fish_caught INTEGER,
-    is_random BOOLEAN,
+    random_sampling BOOLEAN, -- think about this
+    is_dead BOOLEAN,
     release_id INTEGER,
     comments VARCHAR(500),
-    data_sheet_number INTEGER,
-    data_recorder VARCHAR(50),
-    data_recorder_agency VARCHAR(100) REFERENCES agency (code),
+         VARCHAR(50), -- user that is logged in, make these changes in all tables that have these
     creation_at TIMESTAMP,
     updated_at TIMESTAMP,
+    qc_completed_by VARCHAR(50), --- figure this out 
     qc_completed BOOLEAN,
     qc_time TIMESTAMP,
     qc_comments VARCHAR(100)
@@ -238,11 +241,10 @@ CREATE TABLE IF NOT EXISTS release_fish (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     project_id INTEGER REFERENCES project_description,
     release_id INTEGER REFERENCES release,
-    fork_length DECIMAL,
+    fork_length DECIMAL NOT NULL,
     weight DECIMAL,
     time_marked TIMESTAMP,
     comments VARCHAR(500),
-    data_sheet_number INTEGER,
     data_recorder VARCHAR(50),
     data_recorder_agency VARCHAR(100) REFERENCES agency (code),
     created_at TIMESTAMP,
@@ -256,9 +258,9 @@ CREATE TABLE IF NOT EXISTS mark_applied (
   id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
   project_id INTEGER REFERENCES project_description,
   release_id INTEGER REFERENCES release,
-  applied_mark_type VARCHAR(50) REFERENCES mark_type (code),
-  applied_mark_color VARCHAR(50) REFERENCES mark_color (code),
-  applied_mark_pos_id VARCHAR(50) REFERENCES body_part (code),
+  applied_mark_type_id VARCHAR(50) REFERENCES mark_type (code),
+  applied_mark_color_id VARCHAR(50) REFERENCES mark_color (code),
+  applied_mark_position_id VARCHAR(50) REFERENCES body_part (code),
   comments VARCHAR(500),
   data_recorder VARCHAR(50),
   data_recorder_agency VARCHAR(100) REFERENCES agency (code),
@@ -284,3 +286,10 @@ CREATE TABLE IF NOT EXISTS mark_existing (
     qc_completed_at TIMESTAMP,
     qc_comments VARCHAR(500)
 );
+
+
+CREATE TABLE trap_visit_environmental (
+
+);
+
+
