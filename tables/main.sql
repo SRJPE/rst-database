@@ -319,6 +319,8 @@ CREATE TABLE IF NOT EXISTS mark_existing (
 );
 
 CREATE TABLE trap_visit_environmental (
+    id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    trap_visit_id INTEGER REFERENCES trap_visit,
     measure_name VARCHAR(25),
     measure_value_numeric DECIMAL,
     measure_value_text VARCHAR(25),
