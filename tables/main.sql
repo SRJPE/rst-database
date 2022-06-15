@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS agency (
 );
 
 --- TODO: implement these, or decide if better off as enums
-CREATE TABLE IF NOT EXISTS sample_gear (
+CREATE TABLE IF NOT EXISTS equipment (
     code VARCHAR(50) PRIMARY KEY,
     description VARCHAR(50), 
     created_at TIMESTAMP,
@@ -110,11 +110,18 @@ CREATE TABLE IF NOT EXISTS body_part (
 
  --- main tables
 
+CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    first_name VARCHAR(25),
+    last_name VARCHAR(25),
+    email VARCHAR(50),
+    recorder_agency VARCHAR(100) REFERENCES agency (code)
+);
+
 CREATE TABLE IF NOT EXISTS site (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     site_name VARCHAR(50),
-    data_recorder VARCHAR(50),
-    data_recorder_agency VARCHAR(100) REFERENCES agency (code),
+    data_recorder INTEGER REFERENCES users,
     site_abbrv VARCHAR(50),
     start_operation_date DATE,
     end_operation_date DATE,
@@ -162,8 +169,7 @@ CREATE TABLE IF NOT EXISTS project_description (
     initial_date_year INT,
     comments VARCHAR(500),
     active_id INTEGER,
-    data_recorder VARCHAR(50),
-    data_recorder_agency VARCHAR(100) REFERENCES agency (code),
+    data_recorder INTEGER REFERENCES users,
     created_at TIMESTAMP,
     updated_at TIMESTAMP
 );
@@ -175,8 +181,8 @@ CREATE TABLE IF NOT EXISTS trap_visit (
     visit_datetime_start TIMESTAMP,
     visit_datetime_stop TIMESTAMP,
     fish_processed_code VARCHAR(50) REFERENCES fish_processed (code),
-    crew VARCHAR(50), --- this will be an array of FK's
-    sample_gear_code VARCHAR(50) REFERENCES sample_gear (code), -- change to equipment_code
+    crew INTEGER[], 
+    equipment_code VARCHAR(50) REFERENCES equipment (code),
     trap_in_thalweg BOOlEAN,
     trap_functioning_code VARCHAR(50) REFERENCES trap_funcionality (code),
     revolutions_at_start INTEGER,
@@ -196,6 +202,7 @@ CREATE TABLE IF NOT EXISTS release (
   release_purpose_id VARCHAR(50) REFERENCES release_purpose (code),
   source_of_fish_site_id INTEGER REFERENCES site,
   release_site_id INTEGER REFERENCES site,
+  release_crew INTEGER[],
   time_of_check TIMESTAMP,
   num_fish_dead_at_handling INTEGER,
   num_fish_dead_at_holding INTEGER,
@@ -204,7 +211,6 @@ CREATE TABLE IF NOT EXISTS release (
   release_light_condition VARCHAR(50) REFERENCES light_condition (code),
   created_at TIMESTAMP, 
   updated_at TIMESTAMP, 
-  --- add release crew columns
 );
 
 CREATE TABLE IF NOT EXISTS catch_raw (
@@ -216,7 +222,6 @@ CREATE TABLE IF NOT EXISTS catch_raw (
     capture_run_code_method VARCHAR(50) REFERENCES run_code_method (code) ,
     final_run_class VARCHAR(100) REFERENCES run (code),
     final_run_class_method VARCHAR(100) REFERENCES run_code_method (code),
-    -- fish_origin_code VARCHAR(50) REFERENCES fish_origin (code),
     adipose_clipped BOOLEAN, 
     life_stage_code VARCHAR(50) REFERENCES life_stage (code),
     life_stage_code_method VARCHAR(50) REFERENCES FIX_ME,
@@ -228,10 +233,10 @@ CREATE TABLE IF NOT EXISTS catch_raw (
     is_dead BOOLEAN,
     release_id INTEGER,
     comments VARCHAR(500),
-         VARCHAR(50), -- user that is logged in, make these changes in all tables that have these
+    data_recorder INTEGER REFERENCES users,
     creation_at TIMESTAMP,
     updated_at TIMESTAMP,
-    qc_completed_by VARCHAR(50), --- figure this out 
+    qc_completed_by INTEGER REFERENCES users,
     qc_completed BOOLEAN,
     qc_time TIMESTAMP,
     qc_comments VARCHAR(100)
@@ -245,8 +250,7 @@ CREATE TABLE IF NOT EXISTS release_fish (
     weight DECIMAL,
     time_marked TIMESTAMP,
     comments VARCHAR(500),
-    data_recorder VARCHAR(50),
-    data_recorder_agency VARCHAR(100) REFERENCES agency (code),
+    data_recorder INTEGER REFERENCES users,
     created_at TIMESTAMP,
     updated_at TIMESTAMP,
     qc_done BOOLEAN,
@@ -262,8 +266,7 @@ CREATE TABLE IF NOT EXISTS mark_applied (
   applied_mark_color_id VARCHAR(50) REFERENCES mark_color (code),
   applied_mark_position_id VARCHAR(50) REFERENCES body_part (code),
   comments VARCHAR(500),
-  data_recorder VARCHAR(50),
-  data_recorder_agency VARCHAR(100) REFERENCES agency (code),
+  data_recorder INTEGER REFERENCES users,
   created_at TIMESTAMP,
   updated_at TIMESTAMP,
   qc_done BOOLEAN,
@@ -279,7 +282,7 @@ CREATE TABLE IF NOT EXISTS mark_existing (
     mark_position_id INTEGER,
     mark_existing_id INTEGER,
     mark_additional_code VARCHAR(50),
-    data_recorder VARCHAR(50),
+    data_recorder INTEGER REFERENCES users,
     created_at TIMESTAMP,
     updated_at TIMESTAMP,
     qc_completed BOOLEAN,
@@ -289,7 +292,10 @@ CREATE TABLE IF NOT EXISTS mark_existing (
 
 
 CREATE TABLE trap_visit_environmental (
-
+    measure_name VARCHAR(25),
+    measure_value_numeric DECIMAL,
+    measure_value_text VARCHAR(25),
+    measure_unit VARCHAR(20)
 );
 
 
