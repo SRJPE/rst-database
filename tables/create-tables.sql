@@ -238,7 +238,6 @@ CREATE TABLE IF NOT EXISTS trap_visit (
     visit_datetime_start TIMESTAMP,
     visit_datetime_stop TIMESTAMP,
     fish_processed_code VARCHAR(5) REFERENCES fish_processed (code),
-    crew INTEGER[], 
     equipment_code VARCHAR(5) REFERENCES equipment (code),
     trap_in_thalweg BOOlEAN,
     trap_functioning_code VARCHAR(5) REFERENCES trap_funcionality (code),
@@ -253,13 +252,18 @@ CREATE TABLE IF NOT EXISTS trap_visit (
     comments VARCHAR(100)
 );
 
+CREATE TABLE IF NOT EXISTS trap_visit_crew (
+    id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    user_id INTEGER REFERENCES users,
+    trap_visit_id INTEGER REFERENCES trap_visit
+);
+
 CREATE TABLE IF NOT EXISTS release (
   id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
   project_id INTEGER REFERENCES project,
   release_purpose_id VARCHAR(50) REFERENCES release_purpose (code),
   source_of_fish_site_id INTEGER REFERENCES site,
   release_site_id INTEGER REFERENCES site,
-  release_crew INTEGER[],
   time_of_check TIMESTAMP,
   num_fish_dead_at_handling INTEGER,
   num_fish_dead_at_holding INTEGER,
@@ -268,6 +272,12 @@ CREATE TABLE IF NOT EXISTS release (
   release_light_condition VARCHAR(50) REFERENCES light_condition (code),
   created_at TIMESTAMP DEFAULT NOW(), 
   updated_at TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS release_crew (
+    id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    user_id INTEGER REFERENCES users,
+    release_id INTEGER REFERENCES release
 );
 
 CREATE TABLE IF NOT EXISTS catch_raw (
