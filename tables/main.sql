@@ -3,21 +3,38 @@ CREATE TYPE states_enum AS ENUM ('CA', 'OR', 'WA');
 --- look up tables
 CREATE TABLE IF NOT EXISTS visit_type (
     code VARCHAR(5) PRIMARY KEY,
-    description VARCHAR(50), 
+    description VARCHAR(100), 
     created_at TIMESTAMP,
     updated_at TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS taxon (
-    code VARCHAR(5) PRIMARY KEY,
-    description VARCHAR(50), 
+    code VARCHAR(10) PRIMARY KEY,
+    commonName VARCHAR(50), 
+    latinName VARCHAR(50),
+    kingdomCommon VARCHAR(50),
+    phylumCommon VARCHAR(50),
+    classCommon VARCHAR(50),
+    orderCommon VARCHAR(50),
+    familyCommon VARCHAR(50),
+    genusCommon VARCHAR(50),
+    speciesCommon VARCHAR(50),
+    subspeciesCommon VARCHAR(50),
+    kingdomLatin VARCHAR(50),
+    phylumLatin VARCHAR(50),
+    classLatin VARCHAR(50),
+    orderLatin VARCHAR(50),
+    familyLatin VARCHAR(50),
+    genusLatin VARCHAR(50),
+    speciesLatin VARCHAR(50),
+    subspeciesLatin VARCHAR(50),
     created_at TIMESTAMP,
     updated_at TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS agency (
     code VARCHAR(5) PRIMARY KEY,
-    description VARCHAR(50), 
+    description VARCHAR(100), 
     created_at TIMESTAMP,
     updated_at TIMESTAMP
 );
@@ -25,42 +42,42 @@ CREATE TABLE IF NOT EXISTS agency (
 --- TODO: implement these, or decide if better off as enums
 CREATE TABLE IF NOT EXISTS equipment (
     code VARCHAR(5) PRIMARY KEY,
-    description VARCHAR(50), 
+    description VARCHAR(100), 
     created_at TIMESTAMP,
     updated_at TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS light_condition (
     code VARCHAR(5) PRIMARY KEY,
-    description VARCHAR(50), 
+    description VARCHAR(100), 
     created_at TIMESTAMP,
     updated_at TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS trap_funcionality (
     code VARCHAR(5) PRIMARY KEY,
-    description VARCHAR(50), 
+    description VARCHAR(100), 
     created_at TIMESTAMP,
     updated_at TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS fish_processed (
     code VARCHAR(5) PRIMARY KEY,
-    description VARCHAR(50), 
+    description VARCHAR(100), 
     created_at TIMESTAMP,
     updated_at TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS run (
     code VARCHAR(5) PRIMARY KEY,
-    description VARCHAR(50), 
+    description VARCHAR(100), 
     created_at TIMESTAMP,
     updated_at TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS run_code_method (
     code VARCHAR(5) PRIMARY KEY,
-    description VARCHAR(50), 
+    description VARCHAR(100), 
     created_at TIMESTAMP,
     updated_at TIMESTAMP
 );
@@ -68,70 +85,70 @@ CREATE TABLE IF NOT EXISTS run_code_method (
 
 CREATE TABLE IF NOT EXISTS life_stage (
     code VARCHAR(5) PRIMARY KEY,
-    description VARCHAR(50), 
+    description VARCHAR(100), 
     created_at TIMESTAMP,
     updated_at TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS release_purpose (
     code VARCHAR(5) PRIMARY KEY,
-    description VARCHAR(50), 
+    description VARCHAR(100), 
     created_at TIMESTAMP,
     updated_at TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS fish_origin (
     code VARCHAR(5) PRIMARY KEY,
-    description VARCHAR(50), 
+    description VARCHAR(100), 
     created_at TIMESTAMP,
     updated_at TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS mark_type (
     code VARCHAR(5) PRIMARY KEY,
-    description VARCHAR(50), 
+    description VARCHAR(100), 
     created_at TIMESTAMP,
     updated_at TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS mark_color (
     code VARCHAR(5) PRIMARY KEY,
-    description VARCHAR(50), 
+    description VARCHAR(100), 
     created_at TIMESTAMP,
     updated_at TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS body_part (
     code VARCHAR(5) PRIMARY KEY,
-    description VARCHAR(50), 
+    description VARCHAR(100), 
     created_at TIMESTAMP,
     updated_at TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS specimen_type (
     code VARCHAR(5) PRIMARY KEY,
-    description VARCHAR(50), 
+    description VARCHAR(100), 
     created_at TIMESTAMP,
     updated_at TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS sub_sample_method (
     code VARCHAR(5) PRIMARY KEY,
-    description VARCHAR(50), 
+    description VARCHAR(100), 
     created_at TIMESTAMP,
     updated_at TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS unit (
     code VARCHAR(5) PRIMARY KEY,
-    description VARCHAR(50), 
+    description VARCHAR(100), 
     created_at TIMESTAMP,
     updated_at TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS cone_debris_volume (
     code VARCHAR(5) PRIMARY KEY,
-    description VARCHAR(50), 
+    description VARCHAR(100), 
     created_at TIMESTAMP,
     updated_at TIMESTAMP
 );
@@ -238,7 +255,7 @@ CREATE TABLE IF NOT EXISTS release (
   released_datetime TIMESTAMP,
   release_light_condition VARCHAR(50) REFERENCES light_condition (code),
   created_at TIMESTAMP, 
-  updated_at TIMESTAMP, 
+  updated_at TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS catch_raw (
@@ -252,7 +269,7 @@ CREATE TABLE IF NOT EXISTS catch_raw (
     final_run_class_method VARCHAR(100) REFERENCES run_code_method (code),
     adipose_clipped BOOLEAN, 
     life_stage_code VARCHAR(5) REFERENCES life_stage (code),
-    life_stage_code_method VARCHAR(50) REFERENCES FIX_ME,
+    -- life_stage_code_method VARCHAR(50) REFERENCES #####,   -- TODO: Fix this
     fork_length DECIMAL,
     total_length DECIMAL,
     weight DECIMAL,
