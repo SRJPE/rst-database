@@ -195,7 +195,7 @@ CREATE TABLE IF NOT EXISTS site (
     updated_at TIMESTAMP
 );
 
-CREATE TABLE IF NOT EXISTS project_description (
+CREATE TABLE IF NOT EXISTS project (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     project_name VARCHAR(20),
     project_desc VARCHAR(50),
@@ -219,9 +219,20 @@ CREATE TABLE IF NOT EXISTS project_description (
     updated_at TIMESTAMP
 );
 
+CREATE TABLE subsite (
+    id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    site_id INTEGER REFERENCES site,
+    project_id INTEGER REFERENCES project,
+    subsite_name VARCHAR(100),
+    subsite_description TEXT,
+    created_at TIMESTAMP,
+    updated_at TIMESTAMP
+
+);
+
 CREATE TABLE IF NOT EXISTS trap_visit (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    project_id INTEGER REFERENCES project_description, 
+    project_id INTEGER REFERENCES project, 
     visit_type_code VARCHAR(5) REFERENCES visit_type (code),
     visit_datetime_start TIMESTAMP,
     visit_datetime_stop TIMESTAMP,
@@ -243,7 +254,7 @@ CREATE TABLE IF NOT EXISTS trap_visit (
 
 CREATE TABLE IF NOT EXISTS release (
   id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-  project_id INTEGER REFERENCES project_description,
+  project_id INTEGER REFERENCES project,
   release_purpose_id VARCHAR(50) REFERENCES release_purpose (code),
   source_of_fish_site_id INTEGER REFERENCES site,
   release_site_id INTEGER REFERENCES site,
@@ -260,7 +271,7 @@ CREATE TABLE IF NOT EXISTS release (
 
 CREATE TABLE IF NOT EXISTS catch_raw (
     catch_raw_id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    project_id INTEGER REFERENCES project_description,
+    project_id INTEGER REFERENCES project,
     trap_visit_id INTEGER REFERENCES trap_visit,
     taxon_code VARCHAR(5) REFERENCES taxon (code),
     capture_run_code VARCHAR(5) REFERENCES run (code),
@@ -289,7 +300,7 @@ CREATE TABLE IF NOT EXISTS catch_raw (
 
 CREATE TABLE IF NOT EXISTS release_fish (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    project_id INTEGER REFERENCES project_description,
+    project_id INTEGER REFERENCES project,
     release_id INTEGER REFERENCES release,
     fork_length DECIMAL NOT NULL,
     weight DECIMAL,
@@ -305,7 +316,7 @@ CREATE TABLE IF NOT EXISTS release_fish (
 
 CREATE TABLE IF NOT EXISTS mark_applied (
   id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-  project_id INTEGER REFERENCES project_description,
+  project_id INTEGER REFERENCES project,
   release_id INTEGER REFERENCES release,
   applied_mark_type_id VARCHAR(50) REFERENCES mark_type (code),
   applied_mark_color_id VARCHAR(50) REFERENCES mark_color (code),
@@ -321,7 +332,7 @@ CREATE TABLE IF NOT EXISTS mark_applied (
 
 CREATE TABLE IF NOT EXISTS mark_existing (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,   
-    project_id INTEGER REFERENCES project_description,
+    project_id INTEGER REFERENCES project,
     mark_type_code VARCHAR(5) REFERENCES mark_type (code),
     mark_color_code VARCHAR(5) REFERENCES mark_color (code),
     mark_position_id INTEGER,
@@ -343,3 +354,6 @@ CREATE TABLE trap_visit_environmental (
     measure_value_text VARCHAR(25),
     measure_unit VARCHAR(5) REFERENCES unit (code)
 );
+
+
+
