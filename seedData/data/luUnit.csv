@@ -5,7 +5,6 @@ Code,Definition
 11,centimeters/second (cm/sec)
 12,cubic feet/second (cfs)
 13,cubic meters/second (m3/sec)
-26,each
 8,feet/second (ft/sec)
 25,fish
 6,foot (ft)
@@ -25,10 +24,7 @@ Code,Definition
 35,minute
 37,mm of mercury
 20,nephelometric turbidity units (NTU)
-252,Not applicable (n/a)
 251,Not recorded
-255,Not yet assigned
-250,Other
 17,ounce (oz)
 23,parts per million (ppm)
 24,parts per thousand (ppt))
@@ -36,8 +32,6 @@ Code,Definition
 22,percent saturation
 16,pound (lb)
 34,second
-254,See Comments
 27,Siemens/cm (S/cm = mho/cm)
 32,square feet (ft2)
 31,square meters (m2)
-253,Unknown
