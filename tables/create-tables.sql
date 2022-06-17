@@ -4,8 +4,8 @@ CREATE TYPE states_enum AS ENUM ('CA', 'OR', 'WA');
 CREATE TABLE IF NOT EXISTS visit_type (
     code VARCHAR(5) PRIMARY KEY,
     description VARCHAR(100), 
-    created_at TIMESTAMP,
-    updated_at TIMESTAMP
+    created_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW()
 );
 
 CREATE TABLE IF NOT EXISTS taxon (
@@ -28,122 +28,122 @@ CREATE TABLE IF NOT EXISTS taxon (
     genusLatin VARCHAR(50),
     speciesLatin VARCHAR(50),
     subspeciesLatin VARCHAR(50),
-    created_at TIMESTAMP,
-    updated_at TIMESTAMP
+    created_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW()
 );
 
 CREATE TABLE IF NOT EXISTS agency (
     code VARCHAR(5) PRIMARY KEY,
     description VARCHAR(100), 
-    created_at TIMESTAMP,
-    updated_at TIMESTAMP
+    created_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW()
 );
 
 --- TODO: implement these, or decide if better off as enums
 CREATE TABLE IF NOT EXISTS equipment (
     code VARCHAR(5) PRIMARY KEY,
     description VARCHAR(100), 
-    created_at TIMESTAMP,
-    updated_at TIMESTAMP
+    created_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW()
 );
 
 CREATE TABLE IF NOT EXISTS light_condition (
     code VARCHAR(5) PRIMARY KEY,
     description VARCHAR(100), 
-    created_at TIMESTAMP,
-    updated_at TIMESTAMP
+    created_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW()
 );
 
 CREATE TABLE IF NOT EXISTS trap_funcionality (
     code VARCHAR(5) PRIMARY KEY,
     description VARCHAR(100), 
-    created_at TIMESTAMP,
-    updated_at TIMESTAMP
+    created_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW()
 );
 
 CREATE TABLE IF NOT EXISTS fish_processed (
     code VARCHAR(5) PRIMARY KEY,
     description VARCHAR(100), 
-    created_at TIMESTAMP,
-    updated_at TIMESTAMP
+    created_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW()
 );
 
 CREATE TABLE IF NOT EXISTS run (
     code VARCHAR(5) PRIMARY KEY,
     description VARCHAR(100), 
-    created_at TIMESTAMP,
-    updated_at TIMESTAMP
+    created_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW()
 );
 
 CREATE TABLE IF NOT EXISTS run_code_method (
     code VARCHAR(5) PRIMARY KEY,
     description VARCHAR(100), 
-    created_at TIMESTAMP,
-    updated_at TIMESTAMP
+    created_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW()
 );
 
 
 CREATE TABLE IF NOT EXISTS life_stage (
     code VARCHAR(5) PRIMARY KEY,
     description VARCHAR(100), 
-    created_at TIMESTAMP,
-    updated_at TIMESTAMP
+    created_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW()
 );
 
 CREATE TABLE IF NOT EXISTS release_purpose (
     code VARCHAR(5) PRIMARY KEY,
     description VARCHAR(100), 
-    created_at TIMESTAMP,
-    updated_at TIMESTAMP
+    created_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW()
 );
 
 CREATE TABLE IF NOT EXISTS mark_type (
     code VARCHAR(5) PRIMARY KEY,
     description VARCHAR(100), 
-    created_at TIMESTAMP,
-    updated_at TIMESTAMP
+    created_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW()
 );
 
 CREATE TABLE IF NOT EXISTS mark_color (
     code VARCHAR(5) PRIMARY KEY,
     description VARCHAR(100), 
-    created_at TIMESTAMP,
-    updated_at TIMESTAMP
+    created_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW()
 );
 
 CREATE TABLE IF NOT EXISTS body_part (
     code VARCHAR(5) PRIMARY KEY,
     description VARCHAR(100), 
-    created_at TIMESTAMP,
-    updated_at TIMESTAMP
+    created_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW()
 );
 
 CREATE TABLE IF NOT EXISTS specimen_type (
     code VARCHAR(5) PRIMARY KEY,
     description VARCHAR(100), 
-    created_at TIMESTAMP,
-    updated_at TIMESTAMP
+    created_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW()
 );
 
 CREATE TABLE IF NOT EXISTS sub_sample_method (
     code VARCHAR(5) PRIMARY KEY,
     description VARCHAR(100), 
-    created_at TIMESTAMP,
-    updated_at TIMESTAMP
+    created_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW()
 );
 
 CREATE TABLE IF NOT EXISTS unit (
     code VARCHAR(5) PRIMARY KEY,
     description VARCHAR(100), 
-    created_at TIMESTAMP,
-    updated_at TIMESTAMP
+    created_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW()
 );
 
 CREATE TABLE IF NOT EXISTS cone_debris_volume (
     code VARCHAR(5) PRIMARY KEY,
     description VARCHAR(100), 
-    created_at TIMESTAMP,
-    updated_at TIMESTAMP
+    created_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW()
 );
 
  --- main tables
@@ -184,11 +184,11 @@ CREATE TABLE IF NOT EXISTS site (
     usgs_station_num VARCHAR(15),
     comments VARCHAR(500),
     active_id INTEGER,
-    created_at TIMESTAMP,
-    updated_at TIMESTAMP
+    created_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW()
 );
 
-CREATE TABLE IF NOT EXISTS project_description (
+CREATE TABLE IF NOT EXISTS project (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     project_name VARCHAR(20),
     project_desc VARCHAR(50),
@@ -208,13 +208,25 @@ CREATE TABLE IF NOT EXISTS project_description (
     comments VARCHAR(500),
     active_id INTEGER,
     data_recorder INTEGER REFERENCES users,
-    created_at TIMESTAMP,
-    updated_at TIMESTAMP
+    created_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE subsite (
+    id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    site_id INTEGER REFERENCES site,
+    project_id INTEGER REFERENCES project,
+    subsite_name VARCHAR(100),
+    subsite_description TEXT,
+    created_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW()
+
 );
 
 CREATE TABLE IF NOT EXISTS trap_visit (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    project_id INTEGER REFERENCES project_description, 
+    project_id INTEGER REFERENCES project,
+    subsite_id INTEGER REFERENCES subsite, 
     visit_type_code VARCHAR(5) REFERENCES visit_type (code),
     visit_datetime_start TIMESTAMP,
     visit_datetime_stop TIMESTAMP,
@@ -226,8 +238,8 @@ CREATE TABLE IF NOT EXISTS trap_visit (
     revolutions_at_stop INTEGER,
     in_half_cone_configuration BOOLEAN,
     debris_volume_code VARCHAR(5),
-    created_at TIMESTAMP,
-    updated_at TIMESTAMP,
+    created_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW(),
     qc_completed BOOLEAN,
     qc_completed_at TIMESTAMP,
     comments VARCHAR(100)
@@ -241,7 +253,7 @@ CREATE TABLE IF NOT EXISTS trap_visit_crew (
 
 CREATE TABLE IF NOT EXISTS release (
   id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-  project_id INTEGER REFERENCES project_description,
+  project_id INTEGER REFERENCES project,
   release_purpose_id VARCHAR(50) REFERENCES release_purpose (code),
   source_of_fish_site_id INTEGER REFERENCES site,
   release_site_id INTEGER REFERENCES site,
@@ -251,8 +263,8 @@ CREATE TABLE IF NOT EXISTS release (
   num_fish_released INTEGER,
   released_datetime TIMESTAMP,
   release_light_condition VARCHAR(50) REFERENCES light_condition (code),
-  created_at TIMESTAMP, 
-  updated_at TIMESTAMP
+  created_at TIMESTAMP DEFAULT NOW(), 
+  updated_at TIMESTAMP DEFAULT NOW()
 );
 
 CREATE TABLE IF NOT EXISTS release_crew (
@@ -263,7 +275,7 @@ CREATE TABLE IF NOT EXISTS release_crew (
 
 CREATE TABLE IF NOT EXISTS catch_raw (
     catch_raw_id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    project_id INTEGER REFERENCES project_description,
+    project_id INTEGER REFERENCES project,
     trap_visit_id INTEGER REFERENCES trap_visit,
     taxon_code VARCHAR(5) REFERENCES taxon (code),
     capture_run_code VARCHAR(5) REFERENCES run (code),
@@ -282,8 +294,8 @@ CREATE TABLE IF NOT EXISTS catch_raw (
     release_id INTEGER,
     comments VARCHAR(500),
     data_recorder INTEGER REFERENCES users,
-    creation_at TIMESTAMP,
-    updated_at TIMESTAMP,
+    created_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW(),
     qc_completed_by INTEGER REFERENCES users,
     qc_completed BOOLEAN,
     qc_time TIMESTAMP,
@@ -292,15 +304,15 @@ CREATE TABLE IF NOT EXISTS catch_raw (
 
 CREATE TABLE IF NOT EXISTS release_fish (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    project_id INTEGER REFERENCES project_description,
+    project_id INTEGER REFERENCES project,
     release_id INTEGER REFERENCES release,
     fork_length DECIMAL NOT NULL,
     weight DECIMAL,
     time_marked TIMESTAMP,
     comments VARCHAR(500),
     data_recorder INTEGER REFERENCES users,
-    created_at TIMESTAMP,
-    updated_at TIMESTAMP,
+    created_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW(),
     qc_done BOOLEAN,
     qc_done_at TIMESTAMP,
     qc_comments VARCHAR(500)
@@ -308,15 +320,15 @@ CREATE TABLE IF NOT EXISTS release_fish (
 
 CREATE TABLE IF NOT EXISTS mark_applied (
   id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-  project_id INTEGER REFERENCES project_description,
+  project_id INTEGER REFERENCES project,
   release_id INTEGER REFERENCES release,
   applied_mark_type_id VARCHAR(50) REFERENCES mark_type (code),
   applied_mark_color_id VARCHAR(50) REFERENCES mark_color (code),
   applied_mark_position_id VARCHAR(50) REFERENCES body_part (code),
   comments VARCHAR(500),
   data_recorder INTEGER REFERENCES users,
-  created_at TIMESTAMP,
-  updated_at TIMESTAMP,
+  created_at TIMESTAMP DEFAULT NOW(),
+  updated_at TIMESTAMP DEFAULT NOW(),
   qc_done BOOLEAN,
   qc_done_at TIMESTAMP,
   qc_comments VARCHAR(500)
@@ -324,15 +336,15 @@ CREATE TABLE IF NOT EXISTS mark_applied (
 
 CREATE TABLE IF NOT EXISTS mark_existing (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,   
-    project_id INTEGER REFERENCES project_description,
+    project_id INTEGER REFERENCES project,
     mark_type_code VARCHAR(5) REFERENCES mark_type (code),
     mark_color_code VARCHAR(5) REFERENCES mark_color (code),
     mark_position_id INTEGER,
     mark_existing_id INTEGER,
     mark_additional_code VARCHAR(5),
     data_recorder INTEGER REFERENCES users,
-    created_at TIMESTAMP,
-    updated_at TIMESTAMP,
+    created_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW(),
     qc_completed BOOLEAN,
     qc_completed_at TIMESTAMP,
     qc_comments VARCHAR(500)
@@ -346,3 +358,6 @@ CREATE TABLE trap_visit_environmental (
     measure_value_text VARCHAR(25),
     measure_unit VARCHAR(5) REFERENCES unit (code)
 );
+
+
+
