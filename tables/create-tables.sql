@@ -97,13 +97,6 @@ CREATE TABLE IF NOT EXISTS release_purpose (
     updated_at TIMESTAMP
 );
 
-CREATE TABLE IF NOT EXISTS fish_origin (
-    code VARCHAR(5) PRIMARY KEY,
-    description VARCHAR(100), 
-    created_at TIMESTAMP,
-    updated_at TIMESTAMP
-);
-
 CREATE TABLE IF NOT EXISTS mark_type (
     code VARCHAR(5) PRIMARY KEY,
     description VARCHAR(100), 
