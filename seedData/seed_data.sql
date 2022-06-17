@@ -30,7 +30,6 @@ COPY run (code, description) FROM '/opt/data/seedData/data/luRun.csv' CSV HEADER
 COPY run_code_method (code, description) FROM '/opt/data/seedData/data/luRunMethod.csv' CSV HEADER;
 COPY life_stage (code, description) FROM '/opt/data/seedData/data/luLifestage.csv' CSV HEADER;
 COPY release_purpose (code, description) FROM '/opt/data/seedData/data/luReleasePurpose.csv' CSV HEADER;
-COPY fish_origin (code, description) FROM '/opt/data/seedData/data/luFishOrigin.csv' CSV HEADER;
 COPY mark_type (code, description) FROM '/opt/data/seedData/data/luMarkType.csv' CSV HEADER;
 COPY mark_color (code, description) FROM '/opt/data/seedData/data/luColor.csv' CSV HEADER;  -- TODO: confirm mark_color is luColor.csv
 COPY body_part (code, description) FROM '/opt/data/seedData/data/luBodyPart.csv' CSV HEADER;
