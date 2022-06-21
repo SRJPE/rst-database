@@ -159,6 +159,7 @@ CREATE TABLE IF NOT EXISTS users (
 CREATE TABLE IF NOT EXISTS site (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     site_name VARCHAR(50),
+    project_id INTEGER REFERENCES project,
     data_recorder INTEGER REFERENCES users,
     site_abbrv VARCHAR(50),
     start_operation_date DATE,
