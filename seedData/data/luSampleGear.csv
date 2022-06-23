@@ -1,22 +1,22 @@
 Code,Definition
-5,12' RST
-1,5' RST
-3,8' RST
-16,Analog hand-held thermometer
-17,Analog thermograph
-29,Barometer
-13,Data logger with probe
-14,Data logger without probe
-21,Electronic depth finder
-15,Electronic meter
-31,Electronic pressure transducer
-23,Float / drogue
-32,Fyke net
-8,Inclined plane trap
-30,Mechanical meter
-251,Not recorded
-22,Pole / measuring stick
-27,Rain gauge
-9,Scoop trap
-25,Secchi disk
-12,Sonar
+5.0,12 foot rst
+1.0,5 foot rst
+3.0,8 foot rst
+16.0,analog hand-held thermometer
+17.0,analog thermograph
+29.0,barometer
+13.0,data logger with probe
+14.0,data logger without probe
+21.0,electronic depth finder
+15.0,electronic meter
+31.0,electronic pressure transducer
+23.0,float or drouge
+32.0,fyke net
+8.0,inclined plane trap
+30.0,mechanical meter
+251.0,not recorded
+22.0,pole or measuring stick
+27.0,rain gauge
+9.0,scoop trap
+25.0,secchi disk
+12.0,sonar

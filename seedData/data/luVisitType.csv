@@ -1,13 +1,8 @@
 Code,Definition
-1,Start trap & begin trapping
-2,Continue trapping
-3,Unplanned restart
-4,End trapping
-5,Drive-by only
-6,Service/adjust/clean trap
-250,Other
-251,Not recorded
-252,Not rapplicable (n/a)
-253,Unknown
-254,See comments
-255,Not yet assigned
+1.0,start trapping
+2.0,continue trapping
+3.0,unplanned restart
+4.0,end trapping
+5.0,drive by
+6.0,service trap
+251.0,Not recorded

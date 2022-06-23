@@ -1,37 +1,37 @@
 Code,Definition
-19,°F
-18,C
-3,centimeter (cm)
-11,centimeters/second (cm/sec)
-12,cubic feet/second (cfs)
-13,cubic meters/second (m3/sec)
-8,feet/second (ft/sec)
-25,fish
-6,foot (ft)
-14,gram (g)
-7,inch (in)
-33,inches of mercury
-30,Jackson turbidity units (JTU)
-15,kilogram (kg)
-1,kilometer (km)
-2,meter (m)
-9,meters/second (m/sec)
-36,mg/L
-29,microSiemens/cm (µS/cm = µmho/cm)
-5,mile
-4,millimeter (mm)
-28,milliSiemens/cm (mS/cm = mmho/cm)
-35,minute
-37,mm of mercury
-20,nephelometric turbidity units (NTU)
-251,Not recorded
-17,ounce (oz)
-23,parts per million (ppm)
-24,parts per thousand (ppt))
-21,percent (%)
-22,percent saturation
-16,pound (lb)
-34,second
-27,Siemens/cm (S/cm = mho/cm)
-32,square feet (ft2)
-31,square meters (m2)
+19.0,fahrenheit (f)
+18.0,celsius (c)
+3.0,centimeter (cm)
+11.0,centimeters/second (cm/sec)
+12.0,cubic feet/second (cfs)
+13.0,cubic meters/second (m3/sec)
+8.0,feet/second (ft/sec)
+25.0,fish
+6.0,foot (ft)
+14.0,gram (g)
+7.0,inch (in)
+33.0,inches of mercury
+30.0,Jackson turbidity units (JTU)
+15.0,kilogram (kg)
+1.0,kilometer (km)
+2.0,meter (m)
+9.0,meters/second (m/sec)
+36.0,milligram/liter (mg/l) 
+29.0,microSiemens / centimeter (µS/cm)
+5.0,mile (mi)
+4.0,millimeter (mm)
+28.0,milliSiemens/cm (mS/cm = mmho/cm)
+35.0,minute (min)
+37.0,mm of mercury
+20.0,nephelometric turbidity units (NTU)
+251.0,not recorded
+17.0,ounce (oz)
+23.0,parts per million (ppm)
+24.0,parts per thousand (ppt)
+21.0,percent (%)
+22.0,percent saturation
+16.0,pound (lb)
+34.0,second (s)
+27.0,siemens/centimeter (S/cm)
+32.0,square feet (ft2)
+31.0,square meters (m2)

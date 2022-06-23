@@ -1,6 +1,14 @@
-Code,Definition
-2,Length-at-date criteria
-3,
-4,
-5,Genetic analysis
-251,Not recorded
+Code,Definition,description
+2.0,river model length at date,
+3.0,delta model length at date ,
+4.0,probabilistc length at date (PLAD),
+5.0,genetic analysis,
+6.0,Morphometrics,
+5.0,Appearance,
+6.0,Modified length-at-date,
+250.0,Other,
+251.0,not recorded,
+252.0,Not applicable (n/a),
+253.0,Unknown,
+254.0,See Comments,
+255.0,Not yet assigned,

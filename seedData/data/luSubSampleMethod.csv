@@ -1,5 +1,10 @@
-Code,Definition
-1,None used
-2,Water displacement method
-3,Split method
-251,Not recorded
+Code,Definition,description
+1.0,none,
+2.0,water displacement method,
+3.0,split method,TODO don't have enough information about what this method is
+250.0,Other,
+251.0,not recorded,
+252.0,Not applicable (n/a),
+253.0,Unknown,
+254.0,See Comments,
+255.0,Not yet assigned,

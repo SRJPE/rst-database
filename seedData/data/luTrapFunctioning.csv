@@ -1,6 +1,6 @@
 Code,Definition
-1,Trap functioning normally
-2,"Trap functioning, but not normally"
-3,Trap stopped functioning
-4,Trap not in service
-251,Not recorded
+1.0,normal
+2.0,abnormal
+3.0,stopped
+4.0,out of service
+251.0,not recorded
