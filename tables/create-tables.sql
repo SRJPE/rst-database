@@ -3,7 +3,7 @@ CREATE TYPE states_enum AS ENUM ('CA', 'OR', 'WA');
 --- look up tables
 CREATE TABLE IF NOT EXISTS visit_type (
     code VARCHAR(5) PRIMARY KEY,
-    description VARCHAR(100), 
+    definition VARCHAR(100),
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP DEFAULT NOW()
 );
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS taxon (
 
 CREATE TABLE IF NOT EXISTS agency (
     code VARCHAR(5) PRIMARY KEY,
-    description VARCHAR(100), 
+    definition VARCHAR(100),
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP DEFAULT NOW()
 );
@@ -42,42 +42,43 @@ CREATE TABLE IF NOT EXISTS agency (
 --- TODO: implement these, or decide if better off as enums
 CREATE TABLE IF NOT EXISTS equipment (
     code VARCHAR(5) PRIMARY KEY,
-    description VARCHAR(100), 
+    definition VARCHAR(100),
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP DEFAULT NOW()
 );
 
 CREATE TABLE IF NOT EXISTS light_condition (
     code VARCHAR(5) PRIMARY KEY,
-    description VARCHAR(100), 
+    definition VARCHAR(100),
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP DEFAULT NOW()
 );
 
 CREATE TABLE IF NOT EXISTS trap_funcionality (
     code VARCHAR(5) PRIMARY KEY,
-    description VARCHAR(100), 
+    definition VARCHAR(100),
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP DEFAULT NOW()
 );
 
 CREATE TABLE IF NOT EXISTS fish_processed (
     code VARCHAR(5) PRIMARY KEY,
-    description VARCHAR(100), 
+    definition VARCHAR(100),
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP DEFAULT NOW()
 );
 
 CREATE TABLE IF NOT EXISTS run (
     code VARCHAR(5) PRIMARY KEY,
-    description VARCHAR(100), 
+    definition VARCHAR(100),
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP DEFAULT NOW()
 );
 
 CREATE TABLE IF NOT EXISTS run_code_method (
     code VARCHAR(5) PRIMARY KEY,
-    description VARCHAR(100), 
+    definition VARCHAR(100),
+    description VARCHAR(200),
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP DEFAULT NOW()
 );
@@ -85,63 +86,65 @@ CREATE TABLE IF NOT EXISTS run_code_method (
 
 CREATE TABLE IF NOT EXISTS life_stage (
     code VARCHAR(5) PRIMARY KEY,
-    description VARCHAR(100), 
+    definition VARCHAR(100),
+    description VARCHAR(200),
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP DEFAULT NOW()
 );
 
 CREATE TABLE IF NOT EXISTS release_purpose (
     code VARCHAR(5) PRIMARY KEY,
-    description VARCHAR(100), 
+    definition VARCHAR(100),
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP DEFAULT NOW()
 );
 
 CREATE TABLE IF NOT EXISTS mark_type (
     code VARCHAR(5) PRIMARY KEY,
-    description VARCHAR(100), 
+    definition VARCHAR(100),
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP DEFAULT NOW()
 );
 
 CREATE TABLE IF NOT EXISTS mark_color (
     code VARCHAR(5) PRIMARY KEY,
-    description VARCHAR(100), 
+    definition VARCHAR(100),
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP DEFAULT NOW()
 );
 
 CREATE TABLE IF NOT EXISTS body_part (
     code VARCHAR(5) PRIMARY KEY,
-    description VARCHAR(100), 
+    definition VARCHAR(100),
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP DEFAULT NOW()
 );
 
 CREATE TABLE IF NOT EXISTS specimen_type (
     code VARCHAR(5) PRIMARY KEY,
-    description VARCHAR(100), 
+    definition VARCHAR(100),
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP DEFAULT NOW()
 );
 
 CREATE TABLE IF NOT EXISTS sub_sample_method (
     code VARCHAR(5) PRIMARY KEY,
-    description VARCHAR(100), 
+    definition VARCHAR(100),
+    description VARCHAR(200),
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP DEFAULT NOW()
 );
 
 CREATE TABLE IF NOT EXISTS unit (
     code VARCHAR(5) PRIMARY KEY,
-    description VARCHAR(100), 
+    definition VARCHAR(100),
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP DEFAULT NOW()
 );
 
 CREATE TABLE IF NOT EXISTS cone_debris_volume (
     code VARCHAR(5) PRIMARY KEY,
-    description VARCHAR(100), 
+    definition VARCHAR(100),
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP DEFAULT NOW()
 );
