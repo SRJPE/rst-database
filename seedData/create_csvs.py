@@ -1,4 +1,3 @@
-import math
 import pandas as pd
 
 input_path = r'/Users/hunterherrera/Desktop/Code/Development/JPE/rst-database/seedData/excel/CAMP tables .xlsx'
@@ -52,8 +51,6 @@ def create_lookup_csvs():
           improvement_value = df.loc[row_index, proposed_improvements_column]
           if type(improvement_value) == str:
             if 'REMOVE' in improvement_value:
-              print('hit')
-              print(improvement_value)
               df.drop(index=[row_index], inplace=True)
               continue
           # TODO: revise condition below to check for if not NaN values
