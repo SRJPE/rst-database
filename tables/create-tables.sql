@@ -156,6 +156,30 @@ CREATE TABLE IF NOT EXISTS users (
     recorder_agency VARCHAR(100) REFERENCES agency (code)
 );
 
+CREATE TABLE IF NOT EXISTS project (
+    id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    project_name VARCHAR(20),
+    project_desc VARCHAR(50),
+    main_contact_name VARCHAR(100),
+    main_contact_agency_id INT,
+    main_contact_telephone VARCHAR(50),
+    main_contact_email VARCHAR(100),
+    address_one VARCHAR(250),
+    address_two VARCHAR(250),
+    city VARCHAR(50),
+    state states_enum,
+    zip VARCHAR(20),
+    data_contact_name VARCHAR(100),
+    data_contact_telephone VARCHAR(50),
+    data_contact_email VARCHAR(100),
+    initial_date_year INT,
+    comments VARCHAR(500),
+    active_id INTEGER,
+    data_recorder INTEGER REFERENCES users,
+    created_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW()
+);
+
 CREATE TABLE IF NOT EXISTS site (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     site_name VARCHAR(50),
@@ -185,30 +209,6 @@ CREATE TABLE IF NOT EXISTS site (
     usgs_station_num VARCHAR(15),
     comments VARCHAR(500),
     active_id INTEGER,
-    created_at TIMESTAMP DEFAULT NOW(),
-    updated_at TIMESTAMP DEFAULT NOW()
-);
-
-CREATE TABLE IF NOT EXISTS project (
-    id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    project_name VARCHAR(20),
-    project_desc VARCHAR(50),
-    main_contact_name VARCHAR(100),
-    main_contact_agency_id INT,
-    main_contact_telephone VARCHAR(50),
-    main_contact_email VARCHAR(100),
-    address_one VARCHAR(250),
-    address_two VARCHAR(250),
-    city VARCHAR(50),
-    state states_enum,
-    zip VARCHAR(20),
-    data_contact_name VARCHAR(100),
-    data_contact_telephone VARCHAR(50),
-    data_contact_email VARCHAR(100),
-    initial_date_year INT,
-    comments VARCHAR(500),
-    active_id INTEGER,
-    data_recorder INTEGER REFERENCES users,
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP DEFAULT NOW()
 );
