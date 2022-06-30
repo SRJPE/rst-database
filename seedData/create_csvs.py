@@ -1,7 +1,8 @@
 import pandas as pd
+import os
 
-input_path = r'/Users/hunterherrera/Desktop/Code/Development/JPE/rst-database/seedData/excel/CAMP tables .xlsx'
-export_path = r'/Users/hunterherrera/Desktop/Code/Development/JPE/rst-database/seedData/data'
+input_path = '/Users/hunterherrera/Desktop/Code/Development/JPE/rst-database/seedData/excel/CAMP tables .xlsx'
+export_path = '/Users/hunterherrera/Desktop/Code/Development/JPE/rst-database/seedData/data'
 
 def create_lookup_csvs():
   tables_to_remove = ['luFishOrigin']
