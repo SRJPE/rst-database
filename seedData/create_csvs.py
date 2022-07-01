@@ -1,8 +1,9 @@
 import pandas as pd
 import os
 
-input_path = '/Users/hunterherrera/Desktop/Code/Development/JPE/rst-database/seedData/excel/CAMP tables .xlsx'
-export_path = '/Users/hunterherrera/Desktop/Code/Development/JPE/rst-database/seedData/data'
+dirname = os.path.dirname(__file__)
+input_path = os.path.join(dirname, './excel/CAMP tables .xlsx')
+export_path = os.path.join(dirname, './data')
 
 def create_lookup_csvs():
   tables_to_remove = ['luFishOrigin']
