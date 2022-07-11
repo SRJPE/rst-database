@@ -5,11 +5,14 @@ dirname = os.path.dirname(__file__)
 input_path = os.path.join(dirname, './excel/CAMP tables .xlsx')
 export_path = os.path.join(dirname, './data')
 
+input_path = '/Users/hunterherrera/Desktop/Code/Development/JPE/rst-database/seedData/excel/CAMP tables .xlsx'
+export_path = '/Users/hunterherrera/Desktop/Code/Development/JPE/rst-database/seedData/data'
+
 def create_lookup_csvs():
   tables_to_remove = ['luFishOrigin']
   columns_to_remove = ['Improvement', 'Unnamed']
-  defintion_column_target = 'Definition'
-  improvements_column_target = 'Improvement'
+  defintion_col_target = 'Definition'
+  improvements_col_target = 'Improvement'
   additional_info_target = '3'
 
   xl = pd.ExcelFile(input_path)
@@ -20,44 +23,37 @@ def create_lookup_csvs():
   # for each lookup table sheet in excel file create csv
   for name in sheet_names:
     if 'lu' in name:
-      excel = pd.read_excel(input_path, sheet_name=name)
-      df = pd.DataFrame(excel)
+      df = pd.read_excel(input_path, sheet_name=name)
       columns = list(df.columns)
       drop_columns = []   # list to dynamically find columns to drop (ex. 'Proposed Improvement', 'Proposed Improvements', 'Proposed Improvements ')
-      defintion_column = ''
-      proposed_improvements_column = ''
-      additional_info_column = ''
+      definition_col = ''
+      proposed_improvements_col = ''
+      additional_info_col = ''
 
       # iterate through columns of df and flag for use / removal
       for column in columns:
-        if defintion_column_target in column:
-          defintion_column = column
-          continue
-        if any(x in column for x in columns_to_remove):
-          drop_columns.append(column)
-          if improvements_column_target in column:
-            proposed_improvements_column = column
-            continue
-          if additional_info_target in column:
-            additional_info_column = column
+        definition_col = column if defintion_col_target in column else ''
+        proposed_improvements_col = column if improvements_col_target in column else ''
+        additional_info_col = column if additional_info_target in column else ''
+        if any(x in column for x in columns_to_remove): drop_columns.append(column)
 
       # iterate through rows and manipulate data if columns exist
       for row_index in df.index:
-        if additional_info_column != '':
-          additional_info_value = df.loc[row_index, additional_info_column]
+        if additional_info_col != '':
+          additional_info_value = df.loc[row_index, additional_info_col]
           if type(additional_info_value) == str:
             if 'REMOVE' in additional_info_value:
               df.drop(index=[row_index], inplace=True)
               continue
-        if proposed_improvements_column != '' and defintion_column != '':
-          improvement_value = df.loc[row_index, proposed_improvements_column]
+        if proposed_improvements_col != '' and definition_col != '':
+          improvement_value = df.loc[row_index, proposed_improvements_col]
           if type(improvement_value) == str:
             if 'REMOVE' in improvement_value:
               df.drop(index=[row_index], inplace=True)
               continue
           # TODO: revise condition below to check for if not NaN values
           if type(improvement_value) != float:
-            df.loc[row_index, defintion_column] = improvement_value
+            df.loc[row_index, definition_col] = improvement_value
 
       # drop unneeded columns & export csv
       df.drop(columns=drop_columns, inplace=True)
