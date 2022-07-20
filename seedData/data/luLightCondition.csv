@@ -1,7 +1,7 @@
-Code,Definition
-1.0,dark night
-2.0,moonlit night
-3.0,dusk
-4.0,dark day 
-250.0,bright day 
-252.0,not recorded
+Definition
+"Night, dark"
+"Night, moonlit"
+Twilight / dusk
+Dark day
+Daylight
+Not recorded

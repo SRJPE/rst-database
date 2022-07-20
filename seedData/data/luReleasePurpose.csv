@@ -1,9 +1,9 @@
-Code,Definition
-1.0,efficiency test
-2.0,livebox retention test
-3.0,hatchery release
-4.0,in-river survival test
-250.0,Other
-252.0,Not applicable (n/a)
-255.0,Not yet assigned
-251.0,not recorded
+Definition
+Trap capture efficiency test
+Livebox retention test
+Hatchery release
+In-river survival estimate
+Other
+Not applicable (n/a)
+Not yet assigned
+""

@@ -1,8 +1,8 @@
-Code,Definition
-1.0,start trapping
-2.0,continue trapping
-3.0,unplanned restart
-4.0,end trapping
-5.0,drive by
-6.0,service trap
-251.0,Not recorded
+Definition
+Start trap & begin trapping
+Continue trapping
+Unplanned restart
+End trapping
+Drive-by only
+Service/adjust/clean trap
+Not recorded

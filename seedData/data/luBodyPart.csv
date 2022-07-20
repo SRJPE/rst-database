@@ -1,18 +1,18 @@
-Code,Definition
-1.0,adipose fin
-6.0,anal fin
-5.0,caudal fin
-14.0,dorsal fin
-26.0,head
-22.0,internal/coelom
-15.0,left side
-17.0,"left side, back"
-16.0,"left side, front"
-13.0,nose
-251.0,not recorded
-10.0,pectoral fin
-7.0,pelvic fin
-18.0,right side
-20.0,"right side, back"
-19.0,"right side, front"
-21.0,whole body
+Definition
+Adipose fin
+Anal fin
+Caudal fin
+Dorsal fin
+Head
+Internal/coelom
+Left side
+"Left side, back"
+"Left side, front"
+Nose
+Not recorded
+"Pectoral fin, left"
+"Pelvic fin, left"
+Right side
+"Right side, back"
+"Right side, front"
+Whole body
