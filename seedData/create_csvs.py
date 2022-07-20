@@ -10,7 +10,7 @@ export_path = '/Users/hunterherrera/Desktop/Code/Development/JPE/rst-database/se
 
 def create_lookup_csvs():
   tables_to_remove = ['luFishOrigin']
-  columns_to_remove = ['Improvement', 'Unnamed']
+  columns_to_remove = ['Improvement', 'Unnamed', 'Code']
   defintion_col_target = 'Definition'
   improvements_col_target = 'Improvement'
   additional_info_target = '3'
