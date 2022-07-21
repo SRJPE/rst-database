@@ -1,22 +1,36 @@
-Code,Definition
-5,12' RST
-1,5' RST
-3,8' RST
-16,Analog hand-held thermometer
-17,Analog thermograph
-29,Barometer
-13,Data logger with probe
-14,Data logger without probe
-21,Electronic depth finder
-15,Electronic meter
-31,Electronic pressure transducer
-23,Float / drogue
-32,Fyke net
-8,Inclined plane trap
-30,Mechanical meter
-251,Not recorded
-22,Pole / measuring stick
-27,Rain gauge
-9,Scoop trap
-25,Secchi disk
-12,Sonar
+Definition
+12' RST
+5' RST
+8' RST
+Analog hand-held thermometer
+Analog thermograph
+Barometer
+Chemical method
+Dam
+Data logger with probe
+Data logger without probe
+Dye
+Electronic depth finder
+Electronic meter
+Electronic pressure transducer
+Float / drogue
+Fyke net
+Gauging station (non-USGS)
+Inclined plane trap
+Mechanical meter
+Not applicable (n/a)
+Not recorded
+Not yet assigned
+Other
+Pole / measuring stick
+Rain gauge
+Rotary screw trap
+Scoop trap
+Secchi disk
+See Comments
+Sonar
+Staff gauge
+U.S. National Weather Service records
+Unknown
+USGS gauging station
+Weir

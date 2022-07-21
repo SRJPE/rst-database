@@ -1,14 +1,19 @@
-Code,Definition
-0,No marks or tags
-1,Elastomer
-2,Fin clip
-3,Pigment / dye
-4,Coded wire tag (CWT)
-5,Freeze brand (bar)
-6,Freeze brand (dot)
-7,PIT tag
-8,Acoustic telemetry tag
-9,Radio telemetry tag
-10,Floy tag
-11,Photonic Dye
-251,Not recorded
+Definition
+No marks or tags
+Elastomer
+Fin clip
+Pigment / dye
+Coded wire tag (CWT)
+Freeze brand (bar)
+Freeze brand (dot)
+PIT tag
+Acoustic telemetry tag
+Radio telemetry tag
+Floy tag
+Photonic Dye
+Other
+Not recorded
+Not applicable (n/a)
+Unknown
+See Comments
+Not yet assigned
