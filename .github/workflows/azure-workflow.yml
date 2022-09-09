@@ -16,6 +16,6 @@ jobs:
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
     - uses: azure/sql-action@v1.3
-      with:        
+      with:
         connection-string: ${{ secrets.AZURE_PSQL_CONNECTION_STRING }}
-        sql-file: '../../tables/create_tables.sql'
+        sql-file: './tables/create_tables.sql'
