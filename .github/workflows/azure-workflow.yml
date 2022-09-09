@@ -17,5 +17,6 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
     - uses: azure/sql-action@v1.3
       with:
+        server-name: rstdb.postgres.database.azure.com
         connection-string: ${{ secrets.AZURE_PSQL_CONNECTION_STRING }}
         sql-file: './tables/create_tables.sql'
