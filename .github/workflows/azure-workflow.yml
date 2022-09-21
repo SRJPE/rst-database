@@ -1,0 +1,22 @@
+# .github/workflows/azure-workflow.yml
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches: 
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2.3.2
+    - uses: azure/login@v1                            # Azure login required to add a temporary firewall rule
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+    - uses: azure/postgresql@v1
+      with:
+        server-name: rstdb.postgres.database.azure.com
+        connection-string: ${{ secrets.AZURE_PSQL_CONNECTION_STRING }}
+        plsql-file: './tables/create_tables.sql'
