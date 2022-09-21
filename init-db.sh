@@ -8,4 +8,4 @@ psql -f tables/drop-tables.sql
 psql -f tables/create-tables.sql
 
 # seed lookups
-psql -f  seedData/seed_data.sql
+psql -f  seed_data/seed_data.sql

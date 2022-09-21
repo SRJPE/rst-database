@@ -5,8 +5,8 @@ dirname = os.path.dirname(__file__)
 input_path = os.path.join(dirname, './excel/CAMP tables .xlsx')
 export_path = os.path.join(dirname, './data')
 
-input_path = '/Users/hunterherrera/Desktop/Code/Development/JPE/rst-database/seedData/excel/CAMP tables .xlsx'
-export_path = '/Users/hunterherrera/Desktop/Code/Development/JPE/rst-database/seedData/data'
+input_path = '/Users/hunterherrera/Desktop/Code/Development/JPE/rst-database/seed_data/excel/CAMP tables .xlsx'
+export_path = '/Users/hunterherrera/Desktop/Code/Development/JPE/rst-database/seed_data/data'
 
 def create_lookup_csvs():
   tables_to_remove = ['luFishOrigin']
