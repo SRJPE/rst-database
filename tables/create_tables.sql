@@ -214,7 +214,7 @@ CREATE TABLE IF NOT EXISTS prorgam_personnel_team (
 
 CREATE TABLE IF NOT EXISTS permit (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    program_id INTEGER REFERENCES project,
+    program_id INTEGER REFERENCES program,
     stream_name VARCHAR(25),
     permit_start_date DATE,
     permit_end_date DATE,
@@ -233,7 +233,7 @@ CREATE TABLE IF NOT EXISTS hatchery (
     hatchery_name VARCHAR(25),
     stream_name VARCHAR(25),
     agreement_id VARCHAR(25),
-    program_id INTEGER REFERENCES project,
+    program_id INTEGER REFERENCES program,
     aggrement_start_date DATE,
     aggrement_end_date DATE,
     renewal_date DATE,
@@ -244,27 +244,11 @@ CREATE TABLE IF NOT EXISTS hatchery (
 
 CREATE TABLE IF NOT EXISTS fish_measure_protocol (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    program_id INTEGER REFERENCES project,
+    program_id INTEGER REFERENCES program,
     species VARCHAR(5) REFERENCES taxon (code),
     life_stage INTEGER REFERENCES life_stage,
     run INTEGER REFERENCES run,
     number_measured NUMERIC
-);
-
-CREATE TABLE IF NOT EXISTS genetic_sampling_data (
-    id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    catch_raw_id INTEGER REFERENCES catch_raw,
-    sample_id VARCHAR(20),
-    sample_bin VARCHAR(20),
-    mucus_swab BOOlEAN,
-    fin_clip BOOLEAN,
-    comments VARCHAR(500)
-);
-
-CREATE TABLE IF NOT EXISTS genetic_sampling_crew (
-    id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    personnel_id INTEGER REFERENCES personnel,
-    genetic_sampling_data_id INTEGER REFERENCES genetic_sampling_data
 );
 
 CREATE TABLE IF NOT EXISTS trap_locations (
@@ -299,7 +283,7 @@ CREATE TABLE IF NOT EXISTS trap_locations (
 CREATE TABLE IF NOT EXISTS subsite (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     site_id INTEGER REFERENCES trap_locations,
-    project_id INTEGER REFERENCES project,
+    project_id INTEGER REFERENCES program,
     subsite_name VARCHAR(100),
     subsite_description TEXT,
     created_at TIMESTAMP DEFAULT NOW(),
@@ -308,7 +292,7 @@ CREATE TABLE IF NOT EXISTS subsite (
 
 CREATE TABLE IF NOT EXISTS trap_visit (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    project_id INTEGER REFERENCES project,
+    project_id INTEGER REFERENCES program,
     subsite_id INTEGER REFERENCES subsite,
     visit_type INTEGER REFERENCES visit_type,
     trap_visit_time_start TIMESTAMP,
@@ -349,7 +333,7 @@ CREATE TABLE IF NOT EXISTS trap_visit_crew (
 
 CREATE TABLE IF NOT EXISTS release (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    project_id INTEGER REFERENCES project,
+    project_id INTEGER REFERENCES program,
     release_purpose_id INTEGER REFERENCES release_purpose,
     source_of_fish_site_id INTEGER REFERENCES trap_locations,
     release_site_id INTEGER REFERENCES trap_locations,
@@ -397,9 +381,26 @@ CREATE TABLE IF NOT EXISTS catch_raw (
     qc_comments VARCHAR(100)
 );
 
+CREATE TABLE IF NOT EXISTS genetic_sampling_data (
+    id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    catch_raw_id INTEGER REFERENCES catch_raw,
+    sample_id VARCHAR(20),
+    sample_bin VARCHAR(20),
+    mucus_swab BOOlEAN,
+    fin_clip BOOLEAN,
+    comments VARCHAR(500)
+);
+
+CREATE TABLE IF NOT EXISTS genetic_sampling_crew (
+    id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    personnel_id INTEGER REFERENCES personnel,
+    genetic_sampling_data_id INTEGER REFERENCES genetic_sampling_data
+);
+
+
 CREATE TABLE IF NOT EXISTS release_fish (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    project_id INTEGER REFERENCES project,
+    project_id INTEGER REFERENCES program,
     release_id INTEGER REFERENCES release,
     fork_length DECIMAL NOT NULL,
     weight DECIMAL,
@@ -425,7 +426,7 @@ CREATE TABLE IF NOT EXISTS mark_applied (
     mark_number INTEGER,
     comments VARCHAR(500),
     created_at TIMESTAMP DEFAULT NOW(),
-    updated_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW()
 );
 
 CREATE TABLE IF NOT EXISTS mark_applied_crew (
@@ -444,12 +445,12 @@ CREATE TABLE IF NOT EXISTS existing_marks (
     mark_type_id INTEGER REFERENCES mark_type,
     mark_position_id INTEGER REFERENCES body_part,
     mark_color_id INTEGER REFERENCES mark_color,
-    mark_code VARCHAR(25)
+    mark_code VARCHAR(25),
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP DEFAULT NOW()
 );
 
-CREATE TABLE trap_visit_environmental (
+CREATE TABLE IF NOT EXISTS trap_visit_environmental (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     trap_visit_id INTEGER REFERENCES trap_visit,
     measure_name VARCHAR(25),
