@@ -273,10 +273,8 @@ CREATE TABLE IF NOT EXISTS trap_locations (
     program_id INTEGER REFERENCES program,
     data_recorder_id INTEGER REFERENCES personnel,
     data_recorder_agency_id INTEGER REFERENCES agency,
-    trap_id VARCHAR(25),
     site_name VARCHAR(50),
-    site_id VARCHAR(25),
-    cone_size NUMERIC,
+    cone_size_ft NUMERIC,
     x_coord NUMERIC,
     y_coord NUMERIC,
     coordinate_system VARCHAR(100),
@@ -333,6 +331,7 @@ CREATE TABLE IF NOT EXISTS trap_visit (
 );
 
 CREATE TABLE IF NOT EXISTS trap_coordinates (
+    id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     trap_visit_id INTEGER REFERENCES trap_visit,
     trap_locations_id INTEGER REFERENCES trap_locations,
     x_coord NUMERIC,
@@ -349,7 +348,7 @@ CREATE TABLE IF NOT EXISTS trap_visit_crew (
 
 CREATE TABLE IF NOT EXISTS release (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    project_id INTEGER REFERENCES project,
+    program_id INTEGER REFERENCES project,
     release_purpose_id INTEGER REFERENCES release_purpose,
     source_of_fish_site_id INTEGER REFERENCES trap_locations,
     release_site_id INTEGER REFERENCES trap_locations,
@@ -401,6 +400,7 @@ CREATE TABLE IF NOT EXISTS release_fish (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     project_id INTEGER REFERENCES project,
     release_id INTEGER REFERENCES release,
+    catch_raw_id VARCHAR(25),
     fork_length DECIMAL NOT NULL,
     weight DECIMAL,
     time_marked TIMESTAMP,
@@ -417,12 +417,10 @@ CREATE TABLE IF NOT EXISTS mark_applied (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     catch_raw_id INTEGER REFERENCES catch_raw,
     program_id INTEGER REFERENCES program,
-    release_id INTEGER REFERENCES release,
-    marked_for_efficiency_trial BOOLEAN,
     mark_type_id INTEGER REFERENCES mark_type,
     mark_position_id INTEGER REFERENCES body_part,
     mark_color_id INTEGER REFERENCES mark_color,
-    mark_number INTEGER,
+    mark_code VARCHAR(25),
     comments VARCHAR(500),
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP DEFAULT NOW(),
