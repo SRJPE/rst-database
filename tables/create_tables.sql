@@ -281,7 +281,7 @@ CREATE TABLE IF NOT EXISTS trap_locations (
 CREATE TABLE IF NOT EXISTS subsite (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     site_id INTEGER REFERENCES trap_locations,
-    project_id INTEGER REFERENCES program,
+    program_id INTEGER REFERENCES program,
     subsite_name VARCHAR(100),
     subsite_description TEXT,
     created_at TIMESTAMP DEFAULT NOW(),
@@ -290,7 +290,7 @@ CREATE TABLE IF NOT EXISTS subsite (
 
 CREATE TABLE IF NOT EXISTS trap_visit (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    project_id INTEGER REFERENCES program,
+    program_id INTEGER REFERENCES program,
     subsite_id INTEGER REFERENCES subsite,
     visit_type INTEGER REFERENCES visit_type,
     trap_visit_time_start TIMESTAMP,
@@ -332,7 +332,7 @@ CREATE TABLE IF NOT EXISTS trap_visit_crew (
 
 CREATE TABLE IF NOT EXISTS release (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    project_id INTEGER REFERENCES program,
+    program_id INTEGER REFERENCES program,
     release_purpose_id INTEGER REFERENCES release_purpose,
     source_of_fish_site_id INTEGER REFERENCES trap_locations,
     release_site_id INTEGER REFERENCES trap_locations,
@@ -399,7 +399,7 @@ CREATE TABLE IF NOT EXISTS genetic_sampling_crew (
 
 CREATE TABLE IF NOT EXISTS release_fish (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    project_id INTEGER REFERENCES program,
+    program_id INTEGER REFERENCES program,
     release_id INTEGER REFERENCES release,
     catch_raw_id VARCHAR(25),
     fork_length DECIMAL NOT NULL,
