@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS light_condition (
     updated_at TIMESTAMP DEFAULT NOW()
 );
 
-CREATE TABLE IF NOT EXISTS trap_funcionality (
+CREATE TABLE IF NOT EXISTS trap_functionality (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     definition VARCHAR(100),
     created_at TIMESTAMP DEFAULT NOW(),
@@ -299,8 +299,8 @@ CREATE TABLE IF NOT EXISTS trap_visit (
     fish_processed INTEGER REFERENCES fish_processed,
     equipment INTEGER REFERENCES equipment,
     trap_in_thalweg BOOlEAN,
-    trap_functioning INTEGER REFERENCES trap_funcionality,
-    status_at_end INTEGER REFERENCES trap_funcionality,
+    trap_functioning INTEGER REFERENCES trap_functionality,
+    status_at_end INTEGER REFERENCES trap_functionality,
     total_revolutions INTEGER,
     rpm_at_start INTEGER,
     rpm_at_stop INTEGER,
