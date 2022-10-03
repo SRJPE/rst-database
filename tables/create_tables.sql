@@ -206,7 +206,7 @@ CREATE TABLE IF NOT EXISTS program (
     updated_at TIMESTAMP DEFAULT NOW()
 );
 
-CREATE TABLE IF NOT EXISTS prorgam_personnel_team (
+CREATE TABLE IF NOT EXISTS progam_personnel_team (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     personnel INTEGER REFERENCES personnel,
     program INTEGER REFERENCES program
