@@ -3,7 +3,7 @@
 \COPY agency (definition) FROM /Users/hunterherrera/Desktop/Code/Development/JPE/rst-database/seed_data/data/luAgency.csv CSV HEADER
 \COPY equipment (definition) FROM /Users/hunterherrera/Desktop/Code/Development/JPE/rst-database/seed_data/data/luSampleGear.csv CSV HEADER
 \COPY light_condition (definition) FROM /Users/hunterherrera/Desktop/Code/Development/JPE/rst-database/seed_data/data/luLightCondition.csv CSV HEADER
-\COPY trap_funcionality (definition) FROM /Users/hunterherrera/Desktop/Code/Development/JPE/rst-database/seed_data/data/luTrapFunctioning.csv CSV HEADER
+\COPY trap_functionality (definition) FROM /Users/hunterherrera/Desktop/Code/Development/JPE/rst-database/seed_data/data/luTrapFunctioning.csv CSV HEADER
 \COPY fish_processed (definition) FROM /Users/hunterherrera/Desktop/Code/Development/JPE/rst-database/seed_data/data/luFishProcessed.csv CSV HEADER
 \COPY run (definition) FROM /Users/hunterherrera/Desktop/Code/Development/JPE/rst-database/seed_data/data/luRun.csv CSV HEADER
 \COPY run_code_method (definition, description) FROM /Users/hunterherrera/Desktop/Code/Development/JPE/rst-database/seed_data/data/luRunMethod.csv CSV HEADER

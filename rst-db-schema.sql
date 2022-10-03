@@ -514,10 +514,10 @@ CREATE TABLE public.taxon (
 ALTER TABLE public.taxon OWNER TO postgres;
 
 --
--- Name: trap_funcionality; Type: TABLE; Schema: public; Owner: postgres
+-- Name: trap_functionality; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public.trap_funcionality (
+CREATE TABLE public.trap_functionality (
     code character varying(50) NOT NULL,
     description character varying(50),
     created_at timestamp without time zone,
@@ -525,7 +525,7 @@ CREATE TABLE public.trap_funcionality (
 );
 
 
-ALTER TABLE public.trap_funcionality OWNER TO postgres;
+ALTER TABLE public.trap_functionality OWNER TO postgres;
 
 --
 -- Name: trap_visit; Type: TABLE; Schema: public; Owner: postgres
@@ -745,10 +745,10 @@ COPY public.taxon (code, description, created_at, updated_at) FROM stdin;
 
 
 --
--- Data for Name: trap_funcionality; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: trap_functionality; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.trap_funcionality (code, description, created_at, updated_at) FROM stdin;
+COPY public.trap_functionality (code, description, created_at, updated_at) FROM stdin;
 \.
 
 
@@ -985,11 +985,11 @@ ALTER TABLE ONLY public.taxon
 
 
 --
--- Name: trap_funcionality trap_funcionality_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: trap_functionality trap_functionality_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public.trap_funcionality
-    ADD CONSTRAINT trap_funcionality_pkey PRIMARY KEY (code);
+ALTER TABLE ONLY public.trap_functionality
+    ADD CONSTRAINT trap_functionality_pkey PRIMARY KEY (code);
 
 
 --
@@ -1269,7 +1269,7 @@ ALTER TABLE ONLY public.trap_visit
 --
 
 ALTER TABLE ONLY public.trap_visit
-    ADD CONSTRAINT trap_visit_trap_functioning_code_fkey FOREIGN KEY (trap_functioning_code) REFERENCES public.trap_funcionality(code);
+    ADD CONSTRAINT trap_visit_trap_functioning_code_fkey FOREIGN KEY (trap_functioning_code) REFERENCES public.trap_functionality(code);
 
 
 --
