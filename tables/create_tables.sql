@@ -208,8 +208,8 @@ CREATE TABLE IF NOT EXISTS program (
 
 CREATE TABLE IF NOT EXISTS program_personnel_team (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    personnel INTEGER REFERENCES personnel,
-    program INTEGER REFERENCES program
+    personnel_id INTEGER REFERENCES personnel,
+    program_id INTEGER REFERENCES program
 );
 
 CREATE TABLE IF NOT EXISTS permit (
@@ -291,11 +291,9 @@ CREATE TABLE IF NOT EXISTS subsite (
 CREATE TABLE IF NOT EXISTS trap_visit (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     program_id INTEGER REFERENCES program,
-    subsite_id INTEGER REFERENCES subsite,
     visit_type INTEGER REFERENCES visit_type,
     trap_visit_time_start TIMESTAMP,
     trap_visit_time_end TIMESTAMP,
-    visit_datetime_stop TIMESTAMP,
     fish_processed INTEGER REFERENCES fish_processed,
     equipment INTEGER REFERENCES equipment,
     trap_in_thalweg BOOlEAN,
