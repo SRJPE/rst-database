@@ -67,7 +67,7 @@ ALTER TABLE public.body_part OWNER TO postgres;
 
 CREATE TABLE public.catch_raw (
     catch_raw_id integer NOT NULL,
-    project_id integer,
+    program_id integer,
     trap_visit_id integer,
     taxon_code character varying(50),
     capture_run_code character varying(50),
@@ -172,7 +172,7 @@ ALTER TABLE public.light_condition OWNER TO postgres;
 
 CREATE TABLE public.mark_applied (
     id integer NOT NULL,
-    project_id integer,
+    program_id integer,
     release_id integer,
     applied_mark_type character varying(50),
     applied_mark_color character varying(50),
@@ -224,7 +224,7 @@ ALTER TABLE public.mark_color OWNER TO postgres;
 
 CREATE TABLE public.mark_existing (
     id integer NOT NULL,
-    project_id integer,
+    program_id integer,
     mark_type_code character varying(50),
     mark_color_code character varying(50),
     mark_position_id integer,
@@ -321,7 +321,7 @@ ALTER TABLE public.project_description ALTER COLUMN id ADD GENERATED ALWAYS AS I
 
 CREATE TABLE public.release (
     id integer NOT NULL,
-    project_id integer,
+    program_id integer,
     release_purpose_code character varying(50),
     source_of_fish_site_id integer,
     release_site_id integer,
@@ -344,7 +344,7 @@ ALTER TABLE public.release OWNER TO postgres;
 
 CREATE TABLE public.release_fish (
     id integer NOT NULL,
-    project_id integer,
+    program_id integer,
     release_id integer,
     fork_length numeric,
     weight numeric,
@@ -533,7 +533,7 @@ ALTER TABLE public.trap_functionality OWNER TO postgres;
 
 CREATE TABLE public.trap_visit (
     id integer NOT NULL,
-    project_id integer,
+    program_id integer,
     visit_type_code character varying(50),
     trap_visit_time timestamp without time zone,
     fish_processed_code character varying(50),
@@ -604,7 +604,7 @@ COPY public.body_part (code, description, created_at, updated_at) FROM stdin;
 -- Data for Name: catch_raw; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.catch_raw (catch_raw_id, project_id, trap_visit_id, taxon_code, capture_run_code, capture_run_code_method, final_run_class, final_run_class_method, fish_origin_code, life_stage_code, fork_length, total_length, weight, num_fish_caught, is_random, release_id, comments, data_sheet_number, data_recorder, data_recorder_agency, creation_at, updated_at, qc_completed, qc_time, qc_comments) FROM stdin;
+COPY public.catch_raw (catch_raw_id, program_id, trap_visit_id, taxon_code, capture_run_code, capture_run_code_method, final_run_class, final_run_class_method, fish_origin_code, life_stage_code, fork_length, total_length, weight, num_fish_caught, is_random, release_id, comments, data_sheet_number, data_recorder, data_recorder_agency, creation_at, updated_at, qc_completed, qc_time, qc_comments) FROM stdin;
 \.
 
 
@@ -644,7 +644,7 @@ COPY public.light_condition (code, description, created_at, updated_at) FROM std
 -- Data for Name: mark_applied; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.mark_applied (id, project_id, release_id, applied_mark_type, applied_mark_color, applied_mark_pos_id, comments, data_recorder, data_recorder_agency, created_at, updated_at, qc_done, qc_done_at, qc_comments) FROM stdin;
+COPY public.mark_applied (id, program_id, release_id, applied_mark_type, applied_mark_color, applied_mark_pos_id, comments, data_recorder, data_recorder_agency, created_at, updated_at, qc_done, qc_done_at, qc_comments) FROM stdin;
 \.
 
 
@@ -660,7 +660,7 @@ COPY public.mark_color (code, description, created_at, updated_at) FROM stdin;
 -- Data for Name: mark_existing; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.mark_existing (id, project_id, mark_type_code, mark_color_code, mark_position_id, mark_existing_id, mark_additional_code, data_recorder, created_at, updated_at, qc_completed, qc_completed_at, qc_comments) FROM stdin;
+COPY public.mark_existing (id, program_id, mark_type_code, mark_color_code, mark_position_id, mark_existing_id, mark_additional_code, data_recorder, created_at, updated_at, qc_completed, qc_completed_at, qc_comments) FROM stdin;
 \.
 
 
@@ -684,7 +684,7 @@ COPY public.project_description (id, project_name, project_desc, main_contact_na
 -- Data for Name: release; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.release (id, project_id, release_purpose_code, source_of_fish_site_id, release_site_id, time_of_check, num_fish_dead_at_handling, num_fish_dead_at_holding, num_fish_released, released_at, release_light_condition, created_at, updated_at) FROM stdin;
+COPY public.release (id, program_id, release_purpose_code, source_of_fish_site_id, release_site_id, time_of_check, num_fish_dead_at_handling, num_fish_dead_at_holding, num_fish_released, released_at, release_light_condition, created_at, updated_at) FROM stdin;
 \.
 
 
@@ -692,7 +692,7 @@ COPY public.release (id, project_id, release_purpose_code, source_of_fish_site_i
 -- Data for Name: release_fish; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.release_fish (id, project_id, release_id, fork_length, weight, time_marked, comments, data_sheet_number, data_recorder, data_recorder_agency, created_at, updated_at, qc_done, qc_done_at, qc_comments) FROM stdin;
+COPY public.release_fish (id, program_id, release_id, fork_length, weight, time_marked, comments, data_sheet_number, data_recorder, data_recorder_agency, created_at, updated_at, qc_done, qc_done_at, qc_comments) FROM stdin;
 \.
 
 
@@ -756,7 +756,7 @@ COPY public.trap_functionality (code, description, created_at, updated_at) FROM 
 -- Data for Name: trap_visit; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.trap_visit (id, project_id, visit_type_code, trap_visit_time, fish_processed_code, crew_id, sample_gear_code, trap_in_thalweg, trap_functioning_code, counter_at_end, rpm_revolution_at_start, rpm_revolution_at_end, in_half_cone_configuration, debris_volume_code, created_at, updated_at, qc_completed, qc_completed_at, comments) FROM stdin;
+COPY public.trap_visit (id, program_id, visit_type_code, trap_visit_time, fish_processed_code, crew_id, sample_gear_code, trap_in_thalweg, trap_functioning_code, counter_at_end, rpm_revolution_at_start, rpm_revolution_at_end, in_half_cone_configuration, debris_volume_code, created_at, updated_at, qc_completed, qc_completed_at, comments) FROM stdin;
 \.
 
 
@@ -1065,11 +1065,11 @@ ALTER TABLE ONLY public.catch_raw
 
 
 --
--- Name: catch_raw catch_raw_project_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: catch_raw catch_raw_program_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.catch_raw
-    ADD CONSTRAINT catch_raw_project_id_fkey FOREIGN KEY (project_id) REFERENCES public.project_description(id);
+    ADD CONSTRAINT catch_raw_program_id_fkey FOREIGN KEY (program_id) REFERENCES public.project_description(id);
 
 
 --
@@ -1121,11 +1121,11 @@ ALTER TABLE ONLY public.mark_applied
 
 
 --
--- Name: mark_applied mark_applied_project_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: mark_applied mark_applied_program_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.mark_applied
-    ADD CONSTRAINT mark_applied_project_id_fkey FOREIGN KEY (project_id) REFERENCES public.project_description(id);
+    ADD CONSTRAINT mark_applied_program_id_fkey FOREIGN KEY (program_id) REFERENCES public.project_description(id);
 
 
 --
@@ -1153,11 +1153,11 @@ ALTER TABLE ONLY public.mark_existing
 
 
 --
--- Name: mark_existing mark_existing_project_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: mark_existing mark_existing_program_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.mark_existing
-    ADD CONSTRAINT mark_existing_project_id_fkey FOREIGN KEY (project_id) REFERENCES public.project_description(id);
+    ADD CONSTRAINT mark_existing_program_id_fkey FOREIGN KEY (program_id) REFERENCES public.project_description(id);
 
 
 --
@@ -1177,11 +1177,11 @@ ALTER TABLE ONLY public.release_fish
 
 
 --
--- Name: release_fish release_fish_project_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: release_fish release_fish_program_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.release_fish
-    ADD CONSTRAINT release_fish_project_id_fkey FOREIGN KEY (project_id) REFERENCES public.project_description(id);
+    ADD CONSTRAINT release_fish_program_id_fkey FOREIGN KEY (program_id) REFERENCES public.project_description(id);
 
 
 --
@@ -1193,11 +1193,11 @@ ALTER TABLE ONLY public.release_fish
 
 
 --
--- Name: release release_project_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: release release_program_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.release
-    ADD CONSTRAINT release_project_id_fkey FOREIGN KEY (project_id) REFERENCES public.project_description(id);
+    ADD CONSTRAINT release_program_id_fkey FOREIGN KEY (program_id) REFERENCES public.project_description(id);
 
 
 --
@@ -1249,11 +1249,11 @@ ALTER TABLE ONLY public.trap_visit
 
 
 --
--- Name: trap_visit trap_visit_project_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: trap_visit trap_visit_program_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.trap_visit
-    ADD CONSTRAINT trap_visit_project_id_fkey FOREIGN KEY (project_id) REFERENCES public.project_description(id);
+    ADD CONSTRAINT trap_visit_program_id_fkey FOREIGN KEY (program_id) REFERENCES public.project_description(id);
 
 
 --
