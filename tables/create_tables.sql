@@ -278,16 +278,6 @@ CREATE TABLE IF NOT EXISTS trap_locations (
     updated_at TIMESTAMP DEFAULT NOW()
 );
 
-CREATE TABLE IF NOT EXISTS subsite (
-    id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    site_id INTEGER REFERENCES trap_locations,
-    program_id INTEGER REFERENCES program,
-    subsite_name VARCHAR(100),
-    subsite_description TEXT,
-    created_at TIMESTAMP DEFAULT NOW(),
-    updated_at TIMESTAMP DEFAULT NOW()
-);
-
 CREATE TABLE IF NOT EXISTS trap_visit (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     program_id INTEGER REFERENCES program,
