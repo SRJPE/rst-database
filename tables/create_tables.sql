@@ -283,7 +283,7 @@ CREATE TABLE IF NOT EXISTS trap_visit (
     program_id INTEGER REFERENCES program,
     visit_type INTEGER REFERENCES visit_type,
     trap_location_id INTEGER REFERENCES trap_locations,
-    trap_visit_time_start TIMESTAMP DEFAULT NOW(),
+    trap_visit_time_start TIMESTAMP,
     trap_visit_time_end TIMESTAMP,
     fish_processed INTEGER REFERENCES fish_processed,
     equipment INTEGER REFERENCES equipment,
