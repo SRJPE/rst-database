@@ -9,7 +9,7 @@ services:
       - POSTGRES_PASSWORD=Food4fi
     ports:
       - '5432:5432'
-    volumes: 
+    volumes:
       - db:/var/lib/postgresql/data
       - type: bind
         source: /mnt/c/Users/emanuel/projects/jpe/rst-database

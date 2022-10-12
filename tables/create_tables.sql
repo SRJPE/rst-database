@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS light_condition (
     updated_at TIMESTAMP DEFAULT NOW()
 );
 
-CREATE TABLE IF NOT EXISTS trap_funcionality (
+CREATE TABLE IF NOT EXISTS trap_functionality (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     definition VARCHAR(100),
     created_at TIMESTAMP DEFAULT NOW(),
@@ -206,10 +206,10 @@ CREATE TABLE IF NOT EXISTS program (
     updated_at TIMESTAMP DEFAULT NOW()
 );
 
-CREATE TABLE IF NOT EXISTS prorgam_personnel_team (
+CREATE TABLE IF NOT EXISTS program_personnel_team (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    personnel INTEGER REFERENCES personnel,
-    program INTEGER REFERENCES program
+    personnel_id INTEGER REFERENCES personnel,
+    program_id INTEGER REFERENCES program
 );
 
 CREATE TABLE IF NOT EXISTS permit (
@@ -257,10 +257,8 @@ CREATE TABLE IF NOT EXISTS trap_locations (
     program_id INTEGER REFERENCES program,
     data_recorder_id INTEGER REFERENCES personnel,
     data_recorder_agency_id INTEGER REFERENCES agency,
-    trap_id VARCHAR(25),
     site_name VARCHAR(50),
-    site_id VARCHAR(25),
-    cone_size NUMERIC,
+    cone_size_ft NUMERIC,
     x_coord NUMERIC,
     y_coord NUMERIC,
     coordinate_system VARCHAR(100),
@@ -280,29 +278,18 @@ CREATE TABLE IF NOT EXISTS trap_locations (
     updated_at TIMESTAMP DEFAULT NOW()
 );
 
-CREATE TABLE IF NOT EXISTS subsite (
-    id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    site_id INTEGER REFERENCES trap_locations,
-    project_id INTEGER REFERENCES program,
-    subsite_name VARCHAR(100),
-    subsite_description TEXT,
-    created_at TIMESTAMP DEFAULT NOW(),
-    updated_at TIMESTAMP DEFAULT NOW()
-);
-
 CREATE TABLE IF NOT EXISTS trap_visit (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    project_id INTEGER REFERENCES program,
-    subsite_id INTEGER REFERENCES subsite,
+    program_id INTEGER REFERENCES program,
     visit_type INTEGER REFERENCES visit_type,
+    trap_location_id INTEGER REFERENCES trap_locations,
     trap_visit_time_start TIMESTAMP,
     trap_visit_time_end TIMESTAMP,
-    visit_datetime_stop TIMESTAMP,
     fish_processed INTEGER REFERENCES fish_processed,
     equipment INTEGER REFERENCES equipment,
     trap_in_thalweg BOOlEAN,
-    trap_functioning INTEGER REFERENCES trap_funcionality,
-    status_at_end INTEGER REFERENCES trap_funcionality,
+    trap_functioning INTEGER REFERENCES trap_functionality,
+    status_at_end INTEGER REFERENCES trap_functionality,
     total_revolutions INTEGER,
     rpm_at_start INTEGER,
     rpm_at_stop INTEGER,
@@ -317,6 +304,7 @@ CREATE TABLE IF NOT EXISTS trap_visit (
 );
 
 CREATE TABLE IF NOT EXISTS trap_coordinates (
+    id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     trap_visit_id INTEGER REFERENCES trap_visit,
     trap_locations_id INTEGER REFERENCES trap_locations,
     x_coord NUMERIC,
@@ -333,7 +321,7 @@ CREATE TABLE IF NOT EXISTS trap_visit_crew (
 
 CREATE TABLE IF NOT EXISTS release (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    project_id INTEGER REFERENCES program,
+    program_id INTEGER REFERENCES program,
     release_purpose_id INTEGER REFERENCES release_purpose,
     source_of_fish_site_id INTEGER REFERENCES trap_locations,
     release_site_id INTEGER REFERENCES trap_locations,
@@ -400,8 +388,9 @@ CREATE TABLE IF NOT EXISTS genetic_sampling_crew (
 
 CREATE TABLE IF NOT EXISTS release_fish (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    project_id INTEGER REFERENCES program,
+    program_id INTEGER REFERENCES program,
     release_id INTEGER REFERENCES release,
+    catch_raw_id VARCHAR(25),
     fork_length DECIMAL NOT NULL,
     weight DECIMAL,
     time_marked TIMESTAMP,
@@ -418,12 +407,10 @@ CREATE TABLE IF NOT EXISTS mark_applied (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     catch_raw_id INTEGER REFERENCES catch_raw,
     program_id INTEGER REFERENCES program,
-    release_id INTEGER REFERENCES release,
-    marked_for_efficiency_trial BOOLEAN,
     mark_type_id INTEGER REFERENCES mark_type,
     mark_position_id INTEGER REFERENCES body_part,
     mark_color_id INTEGER REFERENCES mark_color,
-    mark_number INTEGER,
+    mark_code VARCHAR(25),
     comments VARCHAR(500),
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP DEFAULT NOW()

@@ -39,7 +39,7 @@ COPY light_condition (definition)
 FROM
   '/opt/data/seed_data/data/luLightCondition.csv' CSV HEADER;
 
-COPY trap_funcionality (definition)
+COPY trap_functionality (definition)
 FROM
   '/opt/data/seed_data/data/luTrapFunctioning.csv' CSV HEADER;
 
