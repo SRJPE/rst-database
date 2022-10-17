@@ -12,7 +12,7 @@ services:
     volumes:
       - db:/var/lib/postgresql/data
       - type: bind
-        source: /mnt/c/Users/emanuel/projects/jpe/rst-database
+        source: ${JPE_BIND_DIR}
         target: /opt/data
 volumes:
   db:
