@@ -1,0 +1,31 @@
+{
+  "name": "rst-database",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "migrate": "npx knex migrate:latest",
+    "rollback": "npx knex migrate:down",
+    "makemigrations": "npx knex migrate:make",
+    "makeseeds": "npx knex seed:make",
+    "runseed": "npx knex seed:run",
+    "reset-db": "npm run rollback && npm run migrate && npm run runseed"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FlowWest/rst-database.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FlowWest/rst-database/issues"
+  },
+  "homepage": "https://github.com/FlowWest/rst-database#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "knex": "^2.3.0",
+    "objection": "^3.0.1",
+    "pg": "^8.8.0"
+  }
+}
