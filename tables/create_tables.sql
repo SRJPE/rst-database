@@ -1,10 +1,10 @@
+------ ENUMS ------
+
 CREATE TYPE role_enum AS ENUM ('LEAD', 'NONE');
-
--- CREATE TYPE states_enum AS ENUM ('CA', 'OR', 'WA');
-
 CREATE TYPE plus_count_methodology_enum as ENUM ("NONE", "Volumetric Sampling")
 
---- look up tables
+------ LOOKUP TABLES ------
+
 CREATE TABLE IF NOT EXISTS visit_type (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     definition VARCHAR(100),
@@ -52,19 +52,19 @@ CREATE TABLE IF NOT EXISTS frequency (
     updated_at TIMESTAMP DEFAULT NOW()
 );
 
--- CREATE TABLE IF NOT EXISTS why_trap_not_functioning (
---     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
---     definition VARCHAR(100),
---     created_at TIMESTAMP DEFAULT NOW(),
---     updated_at TIMESTAMP DEFAULT NOW()
--- );
+CREATE TABLE IF NOT EXISTS why_trap_not_functioning (
+    id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    definition VARCHAR(100),
+    created_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW()
+);
 
--- CREATE TABLE IF NOT EXISTS why_fish_not_processed (
---     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
---     definition VARCHAR(100),
---     created_at TIMESTAMP DEFAULT NOW(),
---     updated_at TIMESTAMP DEFAULT NOW()
--- );
+CREATE TABLE IF NOT EXISTS why_fish_not_processed (
+    id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    definition VARCHAR(100),
+    created_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW()
+);
 
 CREATE TABLE IF NOT EXISTS agency (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
@@ -79,13 +79,6 @@ CREATE TABLE IF NOT EXISTS equipment (
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP DEFAULT NOW()
 );
-
--- CREATE TABLE IF NOT EXISTS light_condition (
---     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
---     definition VARCHAR(100),
---     created_at TIMESTAMP DEFAULT NOW(),
---     updated_at TIMESTAMP DEFAULT NOW()
--- );
 
 CREATE TABLE IF NOT EXISTS trap_functionality (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
@@ -152,34 +145,12 @@ CREATE TABLE IF NOT EXISTS body_part (
     updated_at TIMESTAMP DEFAULT NOW()
 );
 
--- CREATE TABLE IF NOT EXISTS specimen_type (
---     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
---     definition VARCHAR(100),
---     created_at TIMESTAMP DEFAULT NOW(),
---     updated_at TIMESTAMP DEFAULT NOW()
--- );
-
--- CREATE TABLE IF NOT EXISTS sub_sample_method (
---     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
---     definition VARCHAR(100),
---     description VARCHAR(200),
---     created_at TIMESTAMP DEFAULT NOW(),
---     updated_at TIMESTAMP DEFAULT NOW()
--- );
-
--- CREATE TABLE IF NOT EXISTS unit (
---     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
---     definition VARCHAR(100),
---     created_at TIMESTAMP DEFAULT NOW(),
---     updated_at TIMESTAMP DEFAULT NOW()
--- );
-
--- CREATE TABLE IF NOT EXISTS cone_debris_volume (
---     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
---     definition VARCHAR(100),
---     created_at TIMESTAMP DEFAULT NOW(),
---     updated_at TIMESTAMP DEFAULT NOW()
--- );
+CREATE TABLE IF NOT EXISTS unit (
+    id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    definition VARCHAR(100),
+    created_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW()
+);
 
 ------ MAIN TABLES ------
 
@@ -249,14 +220,15 @@ CREATE TABLE IF NOT EXISTS hatchery_info (
     hatchery_file_link VARCHAR(200)
 );
 
--- CREATE TABLE IF NOT EXISTS fish_measure_protocol (
---     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
---     program_id INTEGER REFERENCES program,
---     species VARCHAR(5) REFERENCES taxon (code),
---     life_stage INTEGER REFERENCES life_stage,
---     run INTEGER REFERENCES run,
---     number_measured NUMERIC
--- );
+-- FINAL ERD VERSION
+CREATE TABLE IF NOT EXISTS fish_measure_protocol (
+    id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    program_id INTEGER REFERENCES program,
+    species VARCHAR(5) REFERENCES taxon (code),
+    life_stage INTEGER REFERENCES life_stage,
+    run INTEGER REFERENCES run,
+    number_measured NUMERIC
+);
 
 -- FINAL ERD VERSION
 CREATE TABLE IF NOT EXISTS trap_locations (
@@ -288,10 +260,12 @@ CREATE TABLE IF NOT EXISTS trap_visit (
     trap_visit_time_start TIMESTAMP,
     trap_visit_time_end TIMESTAMP,
     fish_processed INTEGER REFERENCES fish_processed,
+    why_fish_not_processed INTEGER REFERENCES why_fish_not_processed,
     sample_gear_id INTEGER REFERENCES equipment,
     cone_depth NUMERIC,
     trap_in_thalweg BOOlEAN,
     trap_functioning INTEGER REFERENCES trap_functionality,
+    why_trap_not_functioning INTEGER REFERENCES why_trap_not_functioning,
     total_revolutions INTEGER,
     rpm_at_start INTEGER,
     rpm_at_end INTEGER,
@@ -328,7 +302,7 @@ CREATE TABLE IF NOT EXISTS trap_visit_environmental (
     measure_name VARCHAR(50),
     measure_value_numeric NUMERIC,
     measure_value_text VARCHAR(100),
-    measure_unit VARCHAR(20)
+    measure_unit INTEGER REFERENCES unit
 );
 
 -- FINAL ERD VERSION
@@ -362,11 +336,11 @@ CREATE TABLE IF NOT EXISTS release (
     total_hatchery_fish_dead INTEGER,
 );
 
--- CREATE TABLE IF NOT EXISTS release_crew (
---     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
---     user_id INTEGER REFERENCES personnel,
---     release_id INTEGER REFERENCES release
--- );
+CREATE TABLE IF NOT EXISTS release_crew (
+    id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    personnel_id INTEGER REFERENCES personnel,
+    release_id INTEGER REFERENCES release
+);
 
 -- FINAL ERD VERSION
 CREATE TABLE IF NOT EXISTS catch_raw (
