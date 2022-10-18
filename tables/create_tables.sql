@@ -174,12 +174,12 @@ CREATE TABLE IF NOT EXISTS body_part (
 --     updated_at TIMESTAMP DEFAULT NOW()
 -- );
 
-CREATE TABLE IF NOT EXISTS cone_debris_volume (
-    id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    definition VARCHAR(100),
-    created_at TIMESTAMP DEFAULT NOW(),
-    updated_at TIMESTAMP DEFAULT NOW()
-);
+-- CREATE TABLE IF NOT EXISTS cone_debris_volume (
+--     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+--     definition VARCHAR(100),
+--     created_at TIMESTAMP DEFAULT NOW(),
+--     updated_at TIMESTAMP DEFAULT NOW()
+-- );
 
 ------ MAIN TABLES ------
 
