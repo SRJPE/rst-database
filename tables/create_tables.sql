@@ -1,7 +1,7 @@
 ------ ENUMS ------
 
 CREATE TYPE role_enum AS ENUM ('LEAD', 'NONE');
-CREATE TYPE plus_count_methodology_enum as ENUM ("NONE", "Volumetric Sampling")
+CREATE TYPE plus_count_methodology_enum as ENUM ('NONE', 'Volumetric Sampling');
 
 ------ LOOKUP TABLES ------
 
@@ -333,7 +333,7 @@ CREATE TABLE IF NOT EXISTS release (
     total_wild_fish_released INTEGER,
     total_hatchery_fish_released INTEGER,
     total_wild_fish_dead INTEGER,
-    total_hatchery_fish_dead INTEGER,
+    total_hatchery_fish_dead INTEGER
 );
 
 CREATE TABLE IF NOT EXISTS release_crew (
@@ -393,7 +393,7 @@ CREATE TABLE IF NOT EXISTS release_fish (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     program_id INTEGER REFERENCES program,
     release_id INTEGER REFERENCES release,
-    catch_raw_id VARCHAR(25),
+    catch_raw_id VARCHAR(25)
 );
 
 -- FINAL ERD VERSION

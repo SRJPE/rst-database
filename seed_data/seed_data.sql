@@ -35,9 +35,9 @@ COPY equipment (definition)
 FROM
   '/opt/data/seed_data/data/luSampleGear.csv' CSV HEADER;
 
-COPY light_condition (definition)
-FROM
-  '/opt/data/seed_data/data/luLightCondition.csv' CSV HEADER;
+-- COPY light_condition (definition)
+-- FROM
+--   '/opt/data/seed_data/data/luLightCondition.csv' CSV HEADER;
 
 COPY trap_functionality (definition)
 FROM
@@ -75,18 +75,18 @@ COPY body_part (definition)
 FROM
   '/opt/data/seed_data/data/luBodyPart.csv' CSV HEADER;
 
-COPY specimen_type (definition)
-FROM
-  '/opt/data/seed_data/data/luSpecimenType.csv' CSV HEADER;
+-- COPY specimen_type (definition)
+-- FROM
+--   '/opt/data/seed_data/data/luSpecimenType.csv' CSV HEADER;
 
-COPY sub_sample_method (definition, description)
-FROM
-  '/opt/data/seed_data/data/luSubSampleMethod.csv' CSV HEADER;
+-- COPY sub_sample_method (definition, description)
+-- FROM
+--   '/opt/data/seed_data/data/luSubSampleMethod.csv' CSV HEADER;
 
 COPY unit (definition)
 FROM
   '/opt/data/seed_data/data/luUnit.csv' CSV HEADER;
 
-COPY cone_debris_volume (definition)
-FROM
-  '/opt/data/seed_data/data/luConeDebrisVolume.csv' CSV HEADER;
+-- COPY cone_debris_volume (definition)
+-- FROM
+--   '/opt/data/seed_data/data/luConeDebrisVolume.csv' CSV HEADER;
