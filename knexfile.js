@@ -5,12 +5,12 @@ const { knexSnakeCaseMappers } = require('objection')
 module.exports = {
   client: 'pg',
   connection: {
-    host: process.env.HOST,
-    user: process.env.USER,
-    password: process.env.PASSWORD,
-    database: process.env.DB,
-    port: parseInt(process.env.PORT, 10) || 5432,
-    ssl: process.env.SSL === 'TRUE',
+    host: process.env.POSTGRES_HOST,
+    user: process.env.POSTGRES_USER,
+    password: process.env.POSTGRES_PASSWORD,
+    database: process.env.POSTGRES_DB,
+    port: parseInt(process.env.POSTGRES_PORT, 10) || 5432,
+    ssl: process.env.POSTGRES_SSL === 'TRUE',
   },
   pool: {
     min: 2,
