@@ -1,8 +1,8 @@
 ------ ENUMS ------
 
 CREATE TYPE role_enum AS ENUM ('LEAD', 'NONE');
-CREATE TYPE plus_count_methodology_enum as ENUM ("NONE", "Volumetric Sampling")
-CREATE TYPE trap_status_at_end_enum as ENUM ("End Trapping", "Restart Trap")
+CREATE TYPE plus_count_methodology_enum as ENUM ("NONE", "Volumetric Sampling");
+CREATE TYPE trap_status_at_end_enum as ENUM ("End Trapping", "Restart Trap");
 
 ------ LOOKUP TABLES ------
 
@@ -335,7 +335,7 @@ CREATE TABLE IF NOT EXISTS release (
     total_wild_fish_released INTEGER,
     total_hatchery_fish_released INTEGER,
     total_wild_fish_dead INTEGER,
-    total_hatchery_fish_dead INTEGER,
+    total_hatchery_fish_dead INTEGER
 );
 
 CREATE TABLE IF NOT EXISTS release_crew (
