@@ -2,6 +2,7 @@
 
 CREATE TYPE role_enum AS ENUM ('LEAD', 'NONE');
 CREATE TYPE plus_count_methodology_enum as ENUM ("NONE", "Volumetric Sampling")
+CREATE TYPE trap_status_at_end_enum as ENUM ("End Trapping", "Restart Trap")
 
 ------ LOOKUP TABLES ------
 
@@ -266,6 +267,7 @@ CREATE TABLE IF NOT EXISTS trap_visit (
     trap_in_thalweg BOOlEAN,
     trap_functioning INTEGER REFERENCES trap_functionality,
     why_trap_not_functioning INTEGER REFERENCES why_trap_not_functioning,
+    trap_status_at_end trap_status_at_end_enum,
     total_revolutions INTEGER,
     rpm_at_start INTEGER,
     rpm_at_end INTEGER,
