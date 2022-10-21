@@ -395,7 +395,7 @@ CREATE TABLE IF NOT EXISTS release_fish (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     program_id INTEGER REFERENCES program,
     release_id INTEGER REFERENCES release,
-    catch_raw_id VARCHAR(25),
+    catch_raw_id VARCHAR(25)
 );
 
 -- FINAL ERD VERSION
