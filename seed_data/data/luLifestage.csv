@@ -1,15 +1,10 @@
 Definition,Description
 yolk sac fry,Newly emerged with visible yolk sac
-fry,"Recently emerged with yolk sac absorbed (button-up fry), Seam along mid-ventral line visible, Pigmentation undeveloped
-"
-parr,"Seam along mid-ventral line not visible, Scales firmly set, Darkly pigmented with distinct parr marks, No silvery coloration
-"
+fry,"Recently emerged with yolk sac absorbed (button-up fry), Seam along mid-ventral line visible, Pigmentation undeveloped"
+parr,"Seam along mid-ventral line not visible, Scales firmly set, Darkly pigmented with distinct parr marks, No silvery coloration"
 silvery parr,Parr marks visible but faded; intermediate degree of silvering
-smolt,"Parr marks highly faded or absent, Bright silver or nearly white coloration, Scales easily shed (deciduous), Black trailing edge on caudal fin, Body/head elongating
-
-
-"
-yearling,Fork length greater than 110 millimeters - emerge prior to the period when smolts are present 
+smolt,"Parr marks highly faded or absent, Bright silver or nearly white coloration, Scales easily shed (deciduous), Black trailing edge on caudal fin, Body/head elongating"
+yearling,Fork length greater than 110 millimeters - emerge prior to the period when smolts are present
 adult,≥ 300mm
 jack,
 not recorded,No data recorded

@@ -24,6 +24,7 @@ def create_lookup_csvs():
         if any(x in column for x in columns_to_remove): drop_columns.append(column)
 
     df.drop(columns=drop_columns, inplace=True)
+    df = df.applymap(lambda x: x.strip() if isinstance(x, str) else x)
     df.to_csv(export_path + "/" + "{}.csv".format(name), encoding='utf-8', index=False)
 
 create_lookup_csvs()
