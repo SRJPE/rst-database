@@ -1,7 +1,6 @@
 Definition,Description
 trap functioning normally,Trap rotating normally in the expected location in river
-trap functioning but not normally ,"The trap appears to be rotating but not consistently - here may be high flows or high debris levels that are affecting the trap
-"
-trap not functioning ,Trap not rotating or displaced in the river
+trap functioning but not normally,The trap appears to be rotating but not consistently - here may be high flows or high debris levels that are affecting the trap
+trap not functioning,Trap not rotating or displaced in the river
 trap not in service,Trap not set up for fishing upon arrival
 not recorded,
