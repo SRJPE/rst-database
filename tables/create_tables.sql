@@ -197,11 +197,11 @@ CREATE TABLE IF NOT EXISTS permit_info (
     permit_end_date DATE,
     flow_threshold NUMERIC,
     temperature_threshold NUMERIC,
-    species VARCHAR(5) REFERENCES taxon (code),
+    species VARCHAR(10) REFERENCES taxon (code),
     listing_unit INTEGER REFERENCES listing_unit,
     fish_life_stage INTEGER REFERENCES life_stage,
-    allowed_expected_take VARCHAR(50),
-    allowed_mortality_count VARCHAR(50),
+    allowed_expected_take NUMERIC,
+    allowed_mortality_count NUMERIC,
     permit_file_link VARCHAR(200)
 );
 
@@ -224,7 +224,7 @@ CREATE TABLE IF NOT EXISTS hatchery_info (
 CREATE TABLE IF NOT EXISTS fish_measure_protocol (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     program_id INTEGER REFERENCES program,
-    species VARCHAR(5) REFERENCES taxon (code),
+    species VARCHAR(10) REFERENCES taxon (code),
     life_stage INTEGER REFERENCES life_stage,
     run INTEGER REFERENCES run,
     number_measured NUMERIC
@@ -347,7 +347,7 @@ CREATE TABLE IF NOT EXISTS catch_raw (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     program_id INTEGER REFERENCES program,
     trap_visit_id INTEGER REFERENCES trap_visit,
-    taxon_code VARCHAR(5) REFERENCES taxon (code),
+    taxon_code VARCHAR(10) REFERENCES taxon (code),
     capture_run_class INTEGER REFERENCES run,
     capture_run_class_method INTEGER REFERENCES run_code_method,
     mark_type INTEGER REFERENCES mark_type,
@@ -424,7 +424,7 @@ CREATE TABLE IF NOT EXISTS existing_marks (
     release_id INTEGER REFERENCES release,
     mark_applied_id INTEGER REFERENCES mark_applied,
     catch_raw_id INTEGER REFERENCES catch_raw,
-    fish_id VARCHAR(5) REFERENCES taxon (code),
+    fish_id VARCHAR(10) REFERENCES taxon (code),
     mark_type_id INTEGER REFERENCES mark_type,
     mark_position_id INTEGER REFERENCES body_part,
     mark_color_id INTEGER REFERENCES mark_color,
