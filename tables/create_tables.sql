@@ -1,11 +1,7 @@
 ------ ENUMS ------
-
 CREATE TYPE role_enum AS ENUM ('LEAD', 'NONE');
-CREATE TYPE plus_count_methodology_enum as ENUM ("NONE", "Volumetric Sampling");
-CREATE TYPE trap_status_at_end_enum as ENUM ("End Trapping", "Restart Trap");
 
 ------ LOOKUP TABLES ------
-
 CREATE TABLE IF NOT EXISTS visit_type (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     definition VARCHAR(100),
@@ -70,6 +66,7 @@ CREATE TABLE IF NOT EXISTS why_fish_not_processed (
 CREATE TABLE IF NOT EXISTS agency (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     definition VARCHAR(100),
+    description VARCHAR(200),
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP DEFAULT NOW()
 );
@@ -81,9 +78,18 @@ CREATE TABLE IF NOT EXISTS equipment (
     updated_at TIMESTAMP DEFAULT NOW()
 );
 
+CREATE TABLE IF NOT EXISTS trap_status_at_end (
+    id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    definition VARCHAR(100),
+    description VARCHAR(200),
+    created_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW()
+);
+
 CREATE TABLE IF NOT EXISTS trap_functionality (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     definition VARCHAR(100),
+    description VARCHAR(200),
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP DEFAULT NOW()
 );
@@ -91,6 +97,7 @@ CREATE TABLE IF NOT EXISTS trap_functionality (
 CREATE TABLE IF NOT EXISTS fish_processed (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     definition VARCHAR(100),
+    description VARCHAR(200),
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP DEFAULT NOW()
 );
@@ -98,6 +105,7 @@ CREATE TABLE IF NOT EXISTS fish_processed (
 CREATE TABLE IF NOT EXISTS run (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     definition VARCHAR(100),
+    description VARCHAR(200),
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP DEFAULT NOW()
 );
@@ -146,6 +154,14 @@ CREATE TABLE IF NOT EXISTS body_part (
     updated_at TIMESTAMP DEFAULT NOW()
 );
 
+CREATE TABLE IF NOT EXISTS plus_count_methodology (
+    id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    definition VARCHAR(100),
+    description VARCHAR(200),
+    created_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW()
+);
+
 CREATE TABLE IF NOT EXISTS unit (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     definition VARCHAR(100),
@@ -154,7 +170,6 @@ CREATE TABLE IF NOT EXISTS unit (
 );
 
 ------ MAIN TABLES ------
-
 -- FINAL ERD VERSION
 CREATE TABLE IF NOT EXISTS personnel (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
@@ -267,7 +282,7 @@ CREATE TABLE IF NOT EXISTS trap_visit (
     trap_in_thalweg BOOlEAN,
     trap_functioning INTEGER REFERENCES trap_functionality,
     why_trap_not_functioning INTEGER REFERENCES why_trap_not_functioning,
-    trap_status_at_end trap_status_at_end_enum,
+    trap_status_at_end INTEGER REFERENCES trap_status_at_end,
     total_revolutions INTEGER,
     rpm_at_start INTEGER,
     rpm_at_end INTEGER,
@@ -359,7 +374,7 @@ CREATE TABLE IF NOT EXISTS catch_raw (
     weight DECIMAL,
     num_fish_caught INTEGER,
     plus_count BOOLEAN,
-    plus_count_methodology plus_count_methodology_enum,
+    plus_count_methodology INTEGER REFERENCES plus_count_methodology,
     is_random BOOLEAN,
     release_id INTEGER REFERENCES release,
     comments VARCHAR(500),
