@@ -1,0 +1,4 @@
+Definition,Description
+restart trap,Restart trap after fish processing to continue trapping 
+end trapping,Lift up the cone and stop trapping on this visit
+not recorded,No data recorded
