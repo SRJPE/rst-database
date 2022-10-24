@@ -1,32 +1,15 @@
-Definition,description 
-Yolk sac fry (alevin),Newly emerged with visible yolk sac
-YOY (young of the year),
-Fry,"Recently emerged with yolk sac absorbed (button-up fry), Seam along mid-ventral line visible, Pigmentation undeveloped
+Definition,Description
+yolk sac fry,Newly emerged with visible yolk sac
+fry,"Recently emerged with yolk sac absorbed (button-up fry), Seam along mid-ventral line visible, Pigmentation undeveloped
 "
-Parr,"Seam along mid-ventral line not visible, Scales firmly set, Darkly pigmented with distinct parr marks, No silvery coloration
+parr,"Seam along mid-ventral line not visible, Scales firmly set, Darkly pigmented with distinct parr marks, No silvery coloration
 "
-Silvery parr,Parr marks visible but faded; intermediate degree of silvering
-Age I+,
-Pre-smolt,
-Smolt,"Parr marks highly faded or absent, Bright silver or nearly white coloration, Scales easily shed (deciduous), Black trailing edge on caudal fin, Body/head elongating
+silvery parr,Parr marks visible but faded; intermediate degree of silvering
+smolt,"Parr marks highly faded or absent, Bright silver or nearly white coloration, Scales easily shed (deciduous), Black trailing edge on caudal fin, Body/head elongating
 
 
 "
-Yearling,TODO criteria 
-Juvenile,
-Adult,≥ 300mm
-Ammocoete,
-Macropthalmia (transformer lamprey),
-Mixed,
-Grilse / jack,TODO criteria 
-Larva,
-Button-up fry,
-Unbuttoned fry,
-Seamed fry,
-Subadult,
-Other,
-Not recorded,
-Not applicable (n/a),
-Unknown,
-See Comments,
-Not yet assigned,
+yearling,Fork length greater than 110 millimeters - emerge prior to the period when smolts are present 
+adult,≥ 300mm
+jack,
+not recorded,No data recorded
