@@ -1,5 +1,6 @@
 ------ ENUMS ------
 CREATE TYPE role_enum AS ENUM ('lead', 'non-lead', 'not recorded');
+CREATE TYPE fish_life_stage_enum AS ENUM ('adult', 'juvenile');
 
 ------ LOOKUP TABLES ------
 CREATE TABLE IF NOT EXISTS visit_type (
@@ -217,7 +218,7 @@ CREATE TABLE IF NOT EXISTS permit_info (
     frequency_sampling_inclement_weather NUMERIC,
     species VARCHAR(10) REFERENCES taxon (code),
     listing_unit INTEGER REFERENCES listing_unit,
-    fish_life_stage INTEGER REFERENCES life_stage,
+    fish_life_stage fish_life_stage_enum,
     allowed_expected_take NUMERIC,
     allowed_mortality_count NUMERIC,
     permit_file_link VARCHAR(200)

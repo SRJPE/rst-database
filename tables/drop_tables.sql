@@ -1,6 +1,6 @@
 -- ENUMS
 DROP TYPE IF EXISTS role_enum CASCADE;
-
+DROP TYPE IF EXISTS fish_life_stage_enum CASCADE;
 
 -- LOOKUPS
 DROP TABLE IF EXISTS visit_type CASCADE;
