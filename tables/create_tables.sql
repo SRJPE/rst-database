@@ -1,8 +1,8 @@
-CREATE TYPE role_enum AS ENUM ('LEAD', 'NONE');
+------ ENUMS ------
+CREATE TYPE role_enum AS ENUM ('lead', 'non-lead', 'not recorded');
+CREATE TYPE fish_life_stage_enum AS ENUM ('adult', 'juvenile');
 
-CREATE TYPE states_enum AS ENUM ('CA', 'OR', 'WA');
-
---- look up tables
+------ LOOKUP TABLES ------
 CREATE TABLE IF NOT EXISTS visit_type (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     definition VARCHAR(100),
@@ -67,11 +67,11 @@ CREATE TABLE IF NOT EXISTS why_fish_not_processed (
 CREATE TABLE IF NOT EXISTS agency (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     definition VARCHAR(100),
+    description VARCHAR(200),
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP DEFAULT NOW()
 );
 
---- TODO: implement these, or decide if better off as enums
 CREATE TABLE IF NOT EXISTS equipment (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     definition VARCHAR(100),
@@ -79,9 +79,10 @@ CREATE TABLE IF NOT EXISTS equipment (
     updated_at TIMESTAMP DEFAULT NOW()
 );
 
-CREATE TABLE IF NOT EXISTS light_condition (
+CREATE TABLE IF NOT EXISTS trap_status_at_end (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     definition VARCHAR(100),
+    description VARCHAR(200),
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP DEFAULT NOW()
 );
@@ -89,6 +90,7 @@ CREATE TABLE IF NOT EXISTS light_condition (
 CREATE TABLE IF NOT EXISTS trap_functionality (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     definition VARCHAR(100),
+    description VARCHAR(200),
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP DEFAULT NOW()
 );
@@ -96,6 +98,7 @@ CREATE TABLE IF NOT EXISTS trap_functionality (
 CREATE TABLE IF NOT EXISTS fish_processed (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     definition VARCHAR(100),
+    description VARCHAR(200),
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP DEFAULT NOW()
 );
@@ -103,6 +106,7 @@ CREATE TABLE IF NOT EXISTS fish_processed (
 CREATE TABLE IF NOT EXISTS run (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     definition VARCHAR(100),
+    description VARCHAR(200),
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP DEFAULT NOW()
 );
@@ -151,14 +155,7 @@ CREATE TABLE IF NOT EXISTS body_part (
     updated_at TIMESTAMP DEFAULT NOW()
 );
 
-CREATE TABLE IF NOT EXISTS specimen_type (
-    id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    definition VARCHAR(100),
-    created_at TIMESTAMP DEFAULT NOW(),
-    updated_at TIMESTAMP DEFAULT NOW()
-);
-
-CREATE TABLE IF NOT EXISTS sub_sample_method (
+CREATE TABLE IF NOT EXISTS plus_count_methodology (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     definition VARCHAR(100),
     description VARCHAR(200),
@@ -173,27 +170,22 @@ CREATE TABLE IF NOT EXISTS unit (
     updated_at TIMESTAMP DEFAULT NOW()
 );
 
-CREATE TABLE IF NOT EXISTS cone_debris_volume (
-    id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    definition VARCHAR(100),
-    created_at TIMESTAMP DEFAULT NOW(),
-    updated_at TIMESTAMP DEFAULT NOW()
-);
-
---- main tables
+------ MAIN TABLES ------
+-- FINAL ERD VERSION
 CREATE TABLE IF NOT EXISTS personnel (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     first_name VARCHAR(25),
     last_name VARCHAR(25),
     email VARCHAR(50),
-    phone VARCHAR(8),
+    phone VARCHAR(12),
     agency_id INTEGER REFERENCES agency,
     role role_enum,
-    orcid_id VARCHAR(8),
+    orcid_id VARCHAR(25),
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP DEFAULT NOW()
 );
 
+-- FINAL ERD VERSION
 CREATE TABLE IF NOT EXISTS program (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     program_name VARCHAR(25),
@@ -206,29 +198,34 @@ CREATE TABLE IF NOT EXISTS program (
     updated_at TIMESTAMP DEFAULT NOW()
 );
 
+-- FINAL ERD VERSION
 CREATE TABLE IF NOT EXISTS program_personnel_team (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     personnel_id INTEGER REFERENCES personnel,
     program_id INTEGER REFERENCES program
 );
 
-CREATE TABLE IF NOT EXISTS permit (
+-- FINAL ERD VERSION
+CREATE TABLE IF NOT EXISTS permit_info (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    permit_id VARCHAR(25),
     program_id INTEGER REFERENCES program,
     stream_name VARCHAR(25),
     permit_start_date DATE,
     permit_end_date DATE,
     flow_threshold NUMERIC,
     temperature_threshold NUMERIC,
-    species VARCHAR(5) REFERENCES taxon (code),
+    frequency_sampling_inclement_weather NUMERIC,
+    species VARCHAR(10) REFERENCES taxon (code),
     listing_unit INTEGER REFERENCES listing_unit,
-    fish_lifestage VARCHAR(25),
-    allowed_expected_take VARCHAR(50),
-    allowed_mortality_count VARCHAR(50),
+    fish_life_stage fish_life_stage_enum,
+    allowed_expected_take NUMERIC,
+    allowed_mortality_count NUMERIC,
     permit_file_link VARCHAR(200)
 );
 
-CREATE TABLE IF NOT EXISTS hatchery (
+-- FINAL ERD VERSION
+CREATE TABLE IF NOT EXISTS hatchery_info (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     hatchery_name VARCHAR(25),
     stream_name VARCHAR(25),
@@ -242,15 +239,17 @@ CREATE TABLE IF NOT EXISTS hatchery (
     hatchery_file_link VARCHAR(200)
 );
 
+-- FINAL ERD VERSION
 CREATE TABLE IF NOT EXISTS fish_measure_protocol (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     program_id INTEGER REFERENCES program,
-    species VARCHAR(5) REFERENCES taxon (code),
+    species VARCHAR(10) REFERENCES taxon (code),
     life_stage INTEGER REFERENCES life_stage,
     run INTEGER REFERENCES run,
     number_measured NUMERIC
 );
 
+-- FINAL ERD VERSION
 CREATE TABLE IF NOT EXISTS trap_locations (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     trap_name VARCHAR(50),
@@ -266,18 +265,12 @@ CREATE TABLE IF NOT EXISTS trap_locations (
     datum VARCHAR(100),
     gage_number NUMERIC,
     gage_agency INTEGER REFERENCES agency,
-    release_site_name VARCHAR(50),
-    release_site_id VARCHAR(50),
-    release_site_x_coord NUMERIC,
-    release_site_y_coord NUMERIC,
-    release_site_coordinate_system VARCHAR(100),
-    release_site_datum VARCHAR(100),
-    release_site_projection VARCHAR(100),
     comments VARCHAR(500),
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP DEFAULT NOW()
 );
 
+-- FINAL ERD VERSION
 CREATE TABLE IF NOT EXISTS trap_visit (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     program_id INTEGER REFERENCES program,
@@ -286,14 +279,16 @@ CREATE TABLE IF NOT EXISTS trap_visit (
     trap_visit_time_start TIMESTAMP,
     trap_visit_time_end TIMESTAMP,
     fish_processed INTEGER REFERENCES fish_processed,
-    equipment INTEGER REFERENCES equipment,
+    why_fish_not_processed INTEGER REFERENCES why_fish_not_processed,
+    sample_gear_id INTEGER REFERENCES equipment,
+    cone_depth NUMERIC,
     trap_in_thalweg BOOlEAN,
     trap_functioning INTEGER REFERENCES trap_functionality,
-    status_at_end INTEGER REFERENCES trap_functionality,
+    why_trap_not_functioning INTEGER REFERENCES why_trap_not_functioning,
+    trap_status_at_end INTEGER REFERENCES trap_status_at_end,
     total_revolutions INTEGER,
     rpm_at_start INTEGER,
-    rpm_at_stop INTEGER,
-    cone_depth NUMERIC,
+    rpm_at_end INTEGER,
     in_half_cone_configuration BOOLEAN,
     debris_volume_liters INTEGER,
     created_at TIMESTAMP DEFAULT NOW(),
@@ -313,39 +308,66 @@ CREATE TABLE IF NOT EXISTS trap_coordinates (
     projection VARCHAR(100)
 );
 
+-- FINAL ERD VERSION
 CREATE TABLE IF NOT EXISTS trap_visit_crew (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     personnel_id INTEGER REFERENCES personnel,
     trap_visit_id INTEGER REFERENCES trap_visit
 );
 
+-- FINAL ERD VERSION
+CREATE TABLE IF NOT EXISTS trap_visit_environmental (
+    id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    trap_visit_id INTEGER REFERENCES trap_visit,
+    measure_name VARCHAR(50),
+    measure_value_numeric NUMERIC,
+    measure_value_text VARCHAR(100),
+    measure_unit INTEGER REFERENCES unit
+);
+
+-- FINAL ERD VERSION
+CREATE TABLE IF NOT EXISTS release_site (
+    id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    trap_locations_id INTEGER REFERENCES trap_locations,
+    release_site_name VARCHAR(50),
+    release_site_x_coord NUMERIC,
+    release_site_y_coord NUMERIC,
+    release_site_coordinate_system VARCHAR(50),
+    release_site_datum VARCHAR(50),
+    release_site_projection VARCHAR(50)
+);
+
+-- FINAL ERD VERSION
 CREATE TABLE IF NOT EXISTS release (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     program_id INTEGER REFERENCES program,
     release_purpose_id INTEGER REFERENCES release_purpose,
-    source_of_fish_site_id INTEGER REFERENCES trap_locations,
-    release_site_id INTEGER REFERENCES trap_locations,
-    time_of_check TIMESTAMP,
-    num_fish_dead_at_handling INTEGER,
-    num_fish_dead_at_holding INTEGER,
-    num_fish_released INTEGER,
-    released_datetime TIMESTAMP,
-    release_light_condition INTEGER REFERENCES light_condition,
-    created_at TIMESTAMP DEFAULT NOW(),
-    updated_at TIMESTAMP DEFAULT NOW()
+    release_site_id INTEGER REFERENCES release_site,
+    released_at TIMESTAMP,
+    marked_at TIMESTAMP,
+    mark_color INTEGER REFERENCES mark_color,
+    mark_type INTEGER REFERENCES mark_type,
+    mark_position INTEGER REFERENCES body_part,
+    run_hatchery_fish INTEGER REFERENCES run,
+    hatchery_fish_weight NUMERIC,
+    total_wild_fish_released INTEGER,
+    total_hatchery_fish_released INTEGER,
+    total_wild_fish_dead INTEGER,
+    total_hatchery_fish_dead INTEGER
 );
 
 CREATE TABLE IF NOT EXISTS release_crew (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    user_id INTEGER REFERENCES personnel,
+    personnel_id INTEGER REFERENCES personnel,
     release_id INTEGER REFERENCES release
 );
 
+-- FINAL ERD VERSION
 CREATE TABLE IF NOT EXISTS catch_raw (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     program_id INTEGER REFERENCES program,
     trap_visit_id INTEGER REFERENCES trap_visit,
-    taxon_code VARCHAR(5) REFERENCES taxon (code),
+    taxon_code VARCHAR(10) REFERENCES taxon (code),
     capture_run_class INTEGER REFERENCES run,
     capture_run_class_method INTEGER REFERENCES run_code_method,
     mark_type INTEGER REFERENCES mark_type,
@@ -355,12 +377,11 @@ CREATE TABLE IF NOT EXISTS catch_raw (
     weight DECIMAL,
     num_fish_caught INTEGER,
     plus_count BOOLEAN,
+    plus_count_methodology INTEGER REFERENCES plus_count_methodology,
     is_random BOOLEAN,
-    release_id INTEGER,
+    release_id INTEGER REFERENCES release,
     comments VARCHAR(500),
-    data_sheet_number INTEGER,
-    data_recorder INTEGER REFERENCES personnel,
-    data_recorder_agency INTEGER REFERENCES agency,
+    created_by INTEGER REFERENCES personnel,
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP DEFAULT NOW(),
     qc_completed BOOLEAN,
@@ -369,40 +390,33 @@ CREATE TABLE IF NOT EXISTS catch_raw (
     qc_comments VARCHAR(100)
 );
 
+-- FINAL ERD VERSION
 CREATE TABLE IF NOT EXISTS genetic_sampling_data (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     catch_raw_id INTEGER REFERENCES catch_raw,
-    sample_id VARCHAR(20),
-    sample_bin VARCHAR(20),
+    sample_id VARCHAR(50),
+    sample_bin VARCHAR(50),
     mucus_swab BOOlEAN,
     fin_clip BOOLEAN,
     comments VARCHAR(500)
 );
 
+-- FINAL ERD VERSION
 CREATE TABLE IF NOT EXISTS genetic_sampling_crew (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     personnel_id INTEGER REFERENCES personnel,
     genetic_sampling_data_id INTEGER REFERENCES genetic_sampling_data
 );
 
-
+-- FINAL ERD VERSION
 CREATE TABLE IF NOT EXISTS release_fish (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     program_id INTEGER REFERENCES program,
     release_id INTEGER REFERENCES release,
-    catch_raw_id VARCHAR(25),
-    fork_length DECIMAL NOT NULL,
-    weight DECIMAL,
-    time_marked TIMESTAMP,
-    comments VARCHAR(500),
-    data_recorder INTEGER REFERENCES personnel,
-    created_at TIMESTAMP DEFAULT NOW(),
-    updated_at TIMESTAMP DEFAULT NOW(),
-    qc_done BOOLEAN,
-    qc_done_at TIMESTAMP,
-    qc_comments VARCHAR(500)
+    catch_raw_id VARCHAR(25)
 );
 
+-- FINAL ERD VERSION
 CREATE TABLE IF NOT EXISTS mark_applied (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     catch_raw_id INTEGER REFERENCES catch_raw,
@@ -416,32 +430,25 @@ CREATE TABLE IF NOT EXISTS mark_applied (
     updated_at TIMESTAMP DEFAULT NOW()
 );
 
+-- FINAL ERD VERSION
 CREATE TABLE IF NOT EXISTS mark_applied_crew (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     personnel INTEGER REFERENCES personnel,
     mark_applied_id INTEGER REFERENCES mark_applied
 );
 
+-- FINAL ERD VERSION
 CREATE TABLE IF NOT EXISTS existing_marks (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     program_id INTEGER REFERENCES program,
     release_id INTEGER REFERENCES release,
     mark_applied_id INTEGER REFERENCES mark_applied,
     catch_raw_id INTEGER REFERENCES catch_raw,
-    fish_id VARCHAR(5) REFERENCES taxon (code),
+    fish_id VARCHAR(10) REFERENCES taxon (code),
     mark_type_id INTEGER REFERENCES mark_type,
     mark_position_id INTEGER REFERENCES body_part,
     mark_color_id INTEGER REFERENCES mark_color,
     mark_code VARCHAR(25),
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP DEFAULT NOW()
-);
-
-CREATE TABLE IF NOT EXISTS trap_visit_environmental (
-    id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    trap_visit_id INTEGER REFERENCES trap_visit,
-    measure_name VARCHAR(25),
-    measure_value_numeric DECIMAL,
-    measure_value_text VARCHAR(25),
-    measure_unit INTEGER REFERENCES unit
 );
