@@ -2,11 +2,8 @@ import pandas as pd
 import os
 
 dirname = os.path.dirname(__file__)
-input_path = os.path.join(dirname, './excel/CAMP tables .xlsx')
+input_path = os.path.join(dirname, './excel/CAMP Tables - Final Draft.xlsx')
 export_path = os.path.join(dirname, './data')
-
-input_path = '/Users/hunterherrera/Desktop/Code/Development/JPE/rst-database/seed_data/excel/CAMP Tables - Final Draft.xlsx'
-export_path = '/Users/hunterherrera/Desktop/Code/Development/JPE/rst-database/seed_data/data'
 
 def create_lookup_csvs():
   columns_to_remove = ['Code']
