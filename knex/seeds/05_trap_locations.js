@@ -15,15 +15,20 @@ exports.seed = async function (knex) {
       coneSizeFt: 5,
       xCoord: '40.05474',
       yCoord: '-122.029',
+      gageNumber: 11381500,
+      gageAgency: 9,
     },
     {
       trapName: 'Deer Creek RST',
+      programId: 2,
       dataRecorderId: 1,
       dataRecorderAgencyId: 2,
       siteName: 'Deer Creek RST',
       coneSizeFt: 5,
       xCoord: '40.01097',
       yCoord: '-121.961',
+      gageNumber: 11383500,
+      gageAgency: 9,
     },
   ])
 }
