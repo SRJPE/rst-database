@@ -1,18 +1,57 @@
-version: '3.8'
+version: '3.9'
 services:
-  db:
-    build: .
+  postgres:
+    build:
+      context: .
+      dockerfile: Dockerfile.db
     restart: always
     environment:
       - POSTGRES_DB=${POSTGRES_DB}
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     ports:
-      - '5432:5432'
+      - '5435:5432'
     volumes:
       - db:/var/lib/postgresql/data
       - type: bind
         source: ${JPE_BIND_DIR}
         target: /opt/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U postgres']
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - rst-network
+
+  migration:
+    tty: true
+    command: tail -f /dev/null
+    depends_on:
+      postgres:
+        condition: service_healthy
+    links:
+      - postgres
+    build:
+      context: .
+      dockerfile: Dockerfile.migration
+    env_file:
+      - .env
+    volumes:
+      - node_modules:/charter-tracking/node_modules
+      - ./knex:/app/knex
+      - type: bind
+        source: ./.env
+        target: /app/.env
+    networks:
+      - rst-network
+    ports:
+      - '8888:8888'
+
 volumes:
   db:
+  node_modules:
+
+networks:
+  rst-network:
+    name: rst-network

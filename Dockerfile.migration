@@ -1,0 +1,18 @@
+FROM node:15.7.0-alpine
+
+ENV NODE_ENV='development'
+
+WORKDIR /app
+COPY ["package.json", "package-lock.json*", "./"]
+
+RUN  if [ "$NODE_ENV" = "development" ] ; then npm install; else npm install --production; fi
+
+COPY . . 
+
+ADD start.sh /
+RUN chmod +x /start.sh
+
+ENV PORT 8888
+EXPOSE $PORT
+
+CMD ["/start.sh"]

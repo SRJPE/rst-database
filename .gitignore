@@ -4,3 +4,12 @@ venv/*
 .python_packages
 __pycache__
 env.sh
+
+# dotenv environment variables file
+.env*
+.env.test
+.env.*
+
+
+# Dependency directories
+node_modules/
