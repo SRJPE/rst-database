@@ -11,6 +11,8 @@ exports.seed = async function (knex) {
     return
   }
   try {
+    // Deletes ALL existing entries
+    await knex('personnel').del()
     // seed personnel
     await knex('personnel').insert([
       {
