@@ -274,8 +274,9 @@ CREATE TABLE IF NOT EXISTS trap_locations (
 CREATE TABLE IF NOT EXISTS trap_visit (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     program_id INTEGER REFERENCES program,
-    visit_type INTEGER REFERENCES visit_type,
+    visit_type_id INTEGER REFERENCES visit_type,
     trap_location_id INTEGER REFERENCES trap_locations,
+    is_paper_entry BOOLEAN,
     trap_visit_time_start TIMESTAMP,
     trap_visit_time_end TIMESTAMP,
     fish_processed INTEGER REFERENCES fish_processed,
@@ -372,6 +373,7 @@ CREATE TABLE IF NOT EXISTS catch_raw (
     capture_run_class_method INTEGER REFERENCES run_code_method,
     mark_type INTEGER REFERENCES mark_type,
     adipose_clipped BOOLEAN,
+    dead BOOLEAN,
     life_stage INTEGER REFERENCES life_stage,
     fork_length DECIMAL,
     weight DECIMAL,
