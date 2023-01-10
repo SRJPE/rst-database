@@ -378,7 +378,6 @@ CREATE TABLE IF NOT EXISTS catch_raw (
     fork_length DECIMAL,
     weight DECIMAL,
     num_fish_caught INTEGER,
-    marked_for_release BOOLEAN,
     plus_count BOOLEAN,
     plus_count_methodology INTEGER REFERENCES plus_count_methodology,
     is_random BOOLEAN,
@@ -409,6 +408,14 @@ CREATE TABLE IF NOT EXISTS genetic_sampling_crew (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     personnel_id INTEGER REFERENCES personnel,
     genetic_sampling_data_id INTEGER REFERENCES genetic_sampling_data
+);
+
+-- FINAL ERD VERSION
+CREATE TABLE IF NOT EXISTS release_fish (
+    id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    program_id INTEGER REFERENCES program,
+    release_id INTEGER REFERENCES release,
+    catch_raw_id VARCHAR(25)
 );
 
 -- FINAL ERD VERSION
