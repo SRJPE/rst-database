@@ -6,6 +6,7 @@ exports.up = function (knex) {
   return knex.raw(`
     ALTER TABLE trap_visit ALTER COLUMN program_id SET NOT NULL;
     ALTER TABLE trap_visit ALTER COLUMN trap_location_id SET NOT NULL;
+    ALTER TABLE trap_visit ALTER COLUMN is_paper_entry SET NOT NULL;
     ALTER TABLE trap_visit ALTER COLUMN is_paper_entry SET DEFAULT FALSE;
     ALTER TABLE trap_visit ALTER COLUMN trap_visit_time_start SET NOT NULL;
     ALTER TABLE trap_visit ALTER COLUMN trap_visit_time_end SET NOT NULL;
@@ -15,6 +16,7 @@ exports.up = function (knex) {
     ALTER TABLE trap_visit ALTER COLUMN trap_status_at_end SET DEFAULT 1;
     ALTER TABLE trap_visit ALTER COLUMN rpm_at_start SET NOT NULL;
     ALTER TABLE trap_visit ALTER COLUMN rpm_at_end SET NOT NULL;
+    ALTER TABLE trap_visit ALTER COLUMN in_half_cone_configuration SET NOT NULL;
     ALTER TABLE trap_visit ALTER COLUMN in_half_cone_configuration SET DEFAULT FALSE;
     ALTER TABLE trap_visit ALTER COLUMN debris_volume_liters SET NOT NULL;
 
@@ -40,6 +42,7 @@ exports.down = function (knex) {
   return knex.raw(`
     ALTER TABLE trap_visit ALTER COLUMN program_id DROP NOT NULL;
     ALTER TABLE trap_visit ALTER COLUMN trap_location_id DROP NOT NULL;
+    ALTER TABLE trap_visit ALTER COLUMN is_paper_entry DROP NOT NULL;
     ALTER TABLE trap_visit ALTER COLUMN is_paper_entry DROP DEFAULT;
     ALTER TABLE trap_visit ALTER COLUMN trap_visit_time_start DROP NOT NULL;
     ALTER TABLE trap_visit ALTER COLUMN trap_visit_time_end DROP NOT NULL;
@@ -49,6 +52,7 @@ exports.down = function (knex) {
     ALTER TABLE trap_visit ALTER COLUMN trap_status_at_end DROP DEFAULT;
     ALTER TABLE trap_visit ALTER COLUMN rpm_at_start DROP NOT NULL;
     ALTER TABLE trap_visit ALTER COLUMN rpm_at_end DROP NOT NULL;
+    ALTER TABLE trap_visit ALTER COLUMN in_half_cone_configuration DROP NOT NULL;
     ALTER TABLE trap_visit ALTER COLUMN in_half_cone_configuration DROP DEFAULT;
     ALTER TABLE trap_visit ALTER COLUMN debris_volume_liters DROP NOT NULL;
 
