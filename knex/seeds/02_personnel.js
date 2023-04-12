@@ -7,9 +7,9 @@ const { join } = require('path')
 require('dotenv').config({ path: join(__dirname, '.env') })
 
 exports.seed = async function (knex) {
-  if (process.env.NODE_ENV === 'production') {
-    return
-  }
+  // if (process.env.NODE_ENV === 'production') {
+  //   return
+  // }
   try {
     // Deletes ALL existing entries
     await knex('personnel').del()
