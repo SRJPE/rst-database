@@ -19,5 +19,23 @@ exports.seed = async function (knex) {
       personnelLead: 1,
       fundingAgency: 2,
     },
+    {
+      programName: 'Feather RST Monitoring',
+      streamName: 'Feather River',
+      personnelLead: 9,
+      fundingAgency: 3,
+    },
+    {
+      programName: 'Yuba River RST Monitoring',
+      streamName: 'Yuba River',
+      personnelLead: 10,
+      fundingAgency: 3,
+    },
+    {
+      programName: 'FlowWest Test Entry',
+      streamName: 'FlowWest Test',
+      personnelLead: 11,
+      fundingAgency: null,
+    },
   ])
 }
