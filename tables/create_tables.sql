@@ -346,9 +346,6 @@ CREATE TABLE IF NOT EXISTS release (
     release_site_id INTEGER REFERENCES release_site,
     released_at TIMESTAMP,
     marked_at TIMESTAMP,
-    mark_color INTEGER REFERENCES mark_color,
-    mark_type INTEGER REFERENCES mark_type,
-    mark_position INTEGER REFERENCES body_part,
     run_hatchery_fish INTEGER REFERENCES run,
     hatchery_fish_weight NUMERIC,
     total_wild_fish_released INTEGER,
@@ -361,6 +358,14 @@ CREATE TABLE IF NOT EXISTS release_crew (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     personnel_id INTEGER REFERENCES personnel,
     release_id INTEGER REFERENCES release
+);
+
+CREATE TABLE IF NOT EXISTS release_marks (
+    id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    release_id INTEGER REFERENCES release,
+    mark_type  INTEGER references mark_type,
+    mark_color  INTEGER references mark_color,
+    body_part  INTEGER references body_part
 );
 
 -- FINAL ERD VERSION
