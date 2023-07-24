@@ -15,11 +15,6 @@ exports.seed = async function (knex) {
       flowThreshold: 1000,
       temperatureThreshold: 16,
       frequencySamplingInclementWeather: 4,
-      species: '161980.0',
-      listingUnit: 1,
-      fishLifeStage: 'juvenile',
-      allowedExpectedTake: 1950,
-      allowedMortalityCount: 10,
     },
     {
       permitId: 26021,
@@ -30,11 +25,6 @@ exports.seed = async function (knex) {
       flowThreshold: 1000,
       temperatureThreshold: 16,
       frequencySamplingInclementWeather: 4,
-      species: '161980.0',
-      listingUnit: 1,
-      fishLifeStage: 'juvenile',
-      allowedExpectedTake: 1950,
-      allowedMortalityCount: 10,
     },
   ])
 }

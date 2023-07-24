@@ -16,4 +16,24 @@ exports.seed = async function (knex) {
     { id: 8, definition: 'fungus' },
     { id: 9, definition: 'none' },
   ])
+  // Deletes ALL existing entries
+  await knex('take_and_mortality').del()
+  await knex('take_and_mortality').insert([
+    {
+      programId: 1,
+      species: '161980.0',
+      listingUnit: 1,
+      fishLifeStage: 'juvenile',
+      allowedExpectedTake: 1950,
+      allowedMortalityCount: 10,
+    },
+    {
+      programId: 2,
+      species: '161980.0',
+      listingUnit: 1,
+      fishLifeStage: 'juvenile',
+      allowedExpectedTake: 1950,
+      allowedMortalityCount: 10,
+    },
+  ])
 }
