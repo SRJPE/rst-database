@@ -6,32 +6,32 @@ exports.seed = async function (knex) {
   // Deletes ALL existing entries
   await knex('fish_condition').del()
   await knex('fish_condition').insert([
-    { id: 1, definition: 'dark coloration' },
-    { id: 2, definition: 'swimming abnormally' },
-    { id: 3, definition: 'bulging eyes' },
-    { id: 4, definition: 'pale gills' },
-    { id: 5, definition: 'bulging abdomen' },
-    { id: 6, definition: 'swollen/protruding vent' },
-    { id: 7, definition: 'bloody eye' },
-    { id: 8, definition: 'fungus' },
-    { id: 9, definition: 'none' },
+    { definition: 'dark coloration' },
+    { definition: 'swimming abnormally' },
+    { definition: 'bulging eyes' },
+    { definition: 'pale gills' },
+    { definition: 'bulging abdomen' },
+    { definition: 'swollen/protruding vent' },
+    { definition: 'bloody eye' },
+    { definition: 'fungus' },
+    { definition: 'none' },
   ])
   // Deletes ALL existing entries
   await knex('take_and_mortality').del()
   await knex('take_and_mortality').insert([
     {
-      programId: 1,
+      permitInfoId: 1,
       species: '161980.0',
       listingUnit: 1,
-      fishLifeStage: 'juvenile',
+      fishLifeStage: 9,
       allowedExpectedTake: 1950,
       allowedMortalityCount: 10,
     },
     {
-      programId: 2,
+      permitInfoId: 2,
       species: '161980.0',
       listingUnit: 1,
-      fishLifeStage: 'juvenile',
+      fishLifeStage: 9,
       allowedExpectedTake: 1950,
       allowedMortalityCount: 10,
     },
