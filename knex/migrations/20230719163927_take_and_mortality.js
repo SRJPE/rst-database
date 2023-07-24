@@ -51,8 +51,8 @@ exports.down = function (knex) {
     ALTER TABLE permit_info ADD COLUMN allowed_expected_take;
     ALTER TABLE permit_info ADD COLUMN allowed_mortality_count;
 
-    ALTER TABLE hatchery_info RENAME COLUMN aggrement_start_date TO agreement_start_date;
-    ALTER TABLE hatchery_info RENAME COLUMN aggrement_end_date TO agreement_end_date;
+    ALTER TABLE hatchery_info RENAME COLUMN agreement_start_date TO aggrement_start_date;
+    ALTER TABLE hatchery_info RENAME COLUMN agreement_end_date TO aggrement_end_date;
 
     `)
 }
