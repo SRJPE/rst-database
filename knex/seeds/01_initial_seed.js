@@ -20,6 +20,12 @@ exports.seed = async function (knex) {
     process.env.NODE_ENV === 'staging' ||
     process.env.NODE_ENV === 'production'
   ) {
+    return knex.raw(
+      fs.readFileSync(
+        path.join(__dirname, '../../seed_data/seed_data.sql'),
+        'utf8'
+      )
+    )
     // return knex.raw(
     //   fs.readFileSync(
     //     path.join(__dirname, '../../seed_data/seed_azure.sql'),
