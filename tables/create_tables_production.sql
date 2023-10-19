@@ -450,12 +450,13 @@ CREATE TABLE IF NOT EXISTS release_site (
 CREATE TABLE IF NOT EXISTS take_and_mortality (
   id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
   permit_info_id INTEGER REFERENCES permit_info,
-  species VARCHAR(50),
+  species VARCHAR(10),
   listing_unit INTEGER REFERENCES listing_unit,
   fish_life_stage INTEGER REFERENCES life_stage,
   allowed_expected_take NUMERIC,
   allowed_mortality_count NUMERIC,
-  comments VARCHAR(100)
+  comments VARCHAR(100),
+	CONSTRAINT take_and_mortality_species_fkey FOREIGN KEY (species) REFERENCES taxon(code)
 );
 
 

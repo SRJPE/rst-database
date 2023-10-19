@@ -21,7 +21,7 @@ exports.seed = async function (knex) {
   await knex('take_and_mortality').insert([
     {
       permitInfoId: 1,
-      species: '161980.0',
+      species: '161980',
       listingUnit: 1,
       fishLifeStage: 9,
       allowedExpectedTake: 1950,
@@ -29,7 +29,7 @@ exports.seed = async function (knex) {
     },
     {
       permitInfoId: 2,
-      species: '161980.0',
+      species: '161980',
       listingUnit: 1,
       fishLifeStage: 9,
       allowedExpectedTake: 1950,
