@@ -259,6 +259,18 @@ exports.seed = async function (knex) {
       gageAgency: null,
     },
     {
+      trapName: 'Hallwood 3',
+      programId: 4,
+      dataRecorderId: 10,
+      dataRecorderAgencyId: 3,
+      siteName: 'Hallwood',
+      coneSizeFt: 8,
+      xCoord: 39.182161,
+      yCoord: -121.506503,
+      gageNumber: null,
+      gageAgency: null,
+    },
+    {
       trapName: 'FlowWest test 1',
       programId: 5,
       dataRecorderId: 11,

@@ -126,6 +126,30 @@ exports.seed = async function (knex) {
         phone: null,
         email: 'bpintel@flowwest.com',
       },
+      {
+        firstName: 'Court',
+        lastName: 'Fund',
+        agencyId: 8, //PSMFC
+        role: 'lead',
+        phone: '559-978-5114',
+        email: 'cfund@psmfc.org',
+      },
+      {
+        firstName: 'Sofia',
+        lastName: 'Markiewicz',
+        agencyId: 8, //PSMFC
+        role: 'non-lead',
+        phone: '805-886-4282',
+        email: 'smarkiewicz@psmfc.org',
+      },
+      {
+        firstName: 'Emily',
+        lastName: 'Barrier',
+        agencyId: 8, //PSMFC
+        role: 'non-lead',
+        phone: '970-691-5882',
+        email: 'ebarrier@psmfc.org',
+      },
     ])
   } catch (error) {
     throw error

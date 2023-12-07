@@ -17,7 +17,10 @@ module.exports = {
     max: 10,
   },
   migrations: {
-    directory: join(__dirname, '/knex/migrations'),
+    directory:
+      process.env.NODE_ENV === 'production'
+        ? join(__dirname, '/knex/migrations_production')
+        : join(__dirname, '/knex/migrations'),
   },
   seeds: {
     directory: join(__dirname, '/knex/seeds'),
