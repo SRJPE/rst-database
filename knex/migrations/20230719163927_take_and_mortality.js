@@ -32,8 +32,7 @@ exports.up = function (knex) {
 
     ALTER TABLE hatchery_info RENAME COLUMN aggrement_start_date TO agreement_start_date;
     ALTER TABLE hatchery_info RENAME COLUMN aggrement_end_date TO agreement_end_date;
-
-    `)
+  `)
 }
 
 /**
@@ -45,14 +44,12 @@ exports.down = function (knex) {
     DROP TABLE IF EXISTS take_and_mortality CASCADE;
     DROP TABLE IF EXISTS fish_condition CASCADE;
 
-    ALTER TABLE permit_info ADD COLUMN species;
-    ALTER TABLE permit_info ADD COLUMN listing_unit;
-    ALTER TABLE permit_info ADD COLUMN fish_life_stage;
-    ALTER TABLE permit_info ADD COLUMN allowed_expected_take;
-    ALTER TABLE permit_info ADD COLUMN allowed_mortality_count;
+    ALTER TABLE permit_info ADD COLUMN species VARCHAR(10) REFERENCES taxon (code);
+    ALTER TABLE permit_info ADD COLUMN listing_unit INTEGER REFERENCES listing_unit;
+    ALTER TABLE permit_info ADD COLUMN fish_life_stage INTEGER REFERENCES life_stage;
+    ALTER TABLE permit_info ADD COLUMN allowed_expected_take NUMERIC;
+    ALTER TABLE permit_info ADD COLUMN allowed_mortality_count NUMERIC;
 
     ALTER TABLE hatchery_info RENAME COLUMN agreement_start_date TO aggrement_start_date;
-    ALTER TABLE hatchery_info RENAME COLUMN agreement_end_date TO aggrement_end_date;
-
-    `)
+    ALTER TABLE hatchery_info RENAME COLUMN agreement_end_date TO aggrement_end_date;`)
 }
