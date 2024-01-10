@@ -6,12 +6,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "migrate": "npx knex migrate:latest",
-    "next_migration":"knex migrate:up",
+    "next_migration": "knex migrate:up",
     "rollback": "npx knex migrate:down",
     "makemigrations": "npx knex migrate:make",
     "makeseeds": "npx knex seed:make",
     "runseed": "npx knex seed:run",
-    "reset-db": "knex migrate:rollback --all && npm run migrate && npm run runseed"
+    "reset-db": "if [ \"$NODE_ENV\" = \"staging\" ] || [ \"$NODE_ENV\" = \"production\" ]; then echo \"Skipping rollback, migrate, and seed for production or staging environment\"; elif [ \"$NODE_ENV\" = \"development\" ]; then knex migrate:rollback --all && npm run migrate && npm run runseed; fi"
   },
   "repository": {
     "type": "git",
