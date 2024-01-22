@@ -30,8 +30,13 @@ exports.seed = async function (knex) {
       { personnel_id: 12, program_id: 5 },
       { personnel_id: 13, program_id: 5 },
       { personnel_id: 14, program_id: 5 },
+      { personnel_id: 15, program_id: 1 },
+      { personnel_id: 15, program_id: 2 },
+      { personnel_id: 16, program_id: 1 },
+      { personnel_id: 16, program_id: 2 },
+      { personnel_id: 17, program_id: 1 },
+      { personnel_id: 17, program_id: 2 },
     ])
-    
   } catch (error) {
     throw error
   }
