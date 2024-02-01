@@ -150,6 +150,30 @@ exports.seed = async function (knex) {
         phone: '970-691-5882',
         email: 'ebarrier@psmfc.org',
       },
+      {
+        firstName: 'Blake',
+        lastName: 'Ramaglia',
+        agencyId: 8, //PSMFC
+        role: 'non-lead',
+      },
+      {
+        firstName: 'Tony',
+        lastName: 'Yang',
+        agencyId: 8,
+        role: 'non-lead',
+      },
+      {
+        firstName: 'Mitch',
+        lastName: 'Barreras',
+        agencyId: 8,
+        role: 'non-lead',
+      },
+      {
+        firstName: 'Dani',
+        lastName: 'Hartwigsen',
+        agencyId: 8,
+        role: 'non-lead',
+      },
     ])
   } catch (error) {
     throw error
