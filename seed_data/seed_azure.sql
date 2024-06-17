@@ -17,4 +17,4 @@
 \COPY plus_count_methodology (definition, description) FROM 'data/luPlusCountMethodology.csv' CSV HEADER
 \COPY trap_status_at_end (definition, description) FROM 'data/luTrapStatusAtEnd.csv' CSV HEADER
 \COPY why_fish_not_processed (definition) FROM 'data/luWhyFishNotProcessed.csv' CSV HEADER
-\COPY why_trap_not_functioning (definition) FROM 'data/luWhyTrapNotFunctioning.csv' CSV HEADER
+\COPY fish_condition (definition) FROM 'data/luFishCondition.csv' CSV HEADER
