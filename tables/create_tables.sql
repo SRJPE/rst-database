@@ -188,8 +188,8 @@ CREATE TABLE IF NOT EXISTS personnel (
 -- FINAL ERD VERSION
 CREATE TABLE IF NOT EXISTS program (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    program_name VARCHAR(25),
-    stream_name VARCHAR(25),
+    program_name VARCHAR(100),
+    stream_name VARCHAR(100),
     personnel_lead INTEGER REFERENCES personnel,
     funding_agency INTEGER REFERENCES agency,
     efficiency_protocols_document_link VARCHAR(200),
