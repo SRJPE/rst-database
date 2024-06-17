@@ -14,6 +14,6 @@ exports.up = function (knex) {
  */
 exports.down = function (knex) {
   return knex.raw(`
-    ALTER TABLE catch_raw ADD mark_type INTEGER references mark_type,;
+    ALTER TABLE catch_raw ADD mark_type INTEGER references mark_type;
     `)
 }
