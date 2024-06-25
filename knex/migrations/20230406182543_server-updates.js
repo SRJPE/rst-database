@@ -8,8 +8,6 @@ exports.up = function (knex) {
     ALTER TABLE trap_visit ALTER COLUMN trap_location_id SET NOT NULL;
     ALTER TABLE trap_visit ALTER COLUMN is_paper_entry SET NOT NULL;
     ALTER TABLE trap_visit ALTER COLUMN is_paper_entry SET DEFAULT FALSE;
-    ALTER TABLE trap_visit ALTER COLUMN trap_visit_time_start SET NOT NULL;
-    ALTER TABLE trap_visit ALTER COLUMN trap_visit_time_end SET NOT NULL;
     ALTER TABLE trap_visit ALTER COLUMN fish_processed SET NOT NULL;
     ALTER TABLE trap_visit ALTER COLUMN trap_functioning SET NOT NULL;
     ALTER TABLE trap_visit ALTER COLUMN trap_status_at_end SET NOT NULL;
@@ -44,8 +42,6 @@ exports.down = function (knex) {
     ALTER TABLE trap_visit ALTER COLUMN trap_location_id DROP NOT NULL;
     ALTER TABLE trap_visit ALTER COLUMN is_paper_entry DROP NOT NULL;
     ALTER TABLE trap_visit ALTER COLUMN is_paper_entry DROP DEFAULT;
-    ALTER TABLE trap_visit ALTER COLUMN trap_visit_time_start DROP NOT NULL;
-    ALTER TABLE trap_visit ALTER COLUMN trap_visit_time_end DROP NOT NULL;
     ALTER TABLE trap_visit ALTER COLUMN fish_processed DROP NOT NULL;
     ALTER TABLE trap_visit ALTER COLUMN trap_functioning DROP NOT NULL;
     ALTER TABLE trap_visit ALTER COLUMN trap_status_at_end DROP NOT NULL;
