@@ -455,7 +455,7 @@ CREATE TABLE IF NOT EXISTS take_and_mortality (
   fish_life_stage INTEGER REFERENCES life_stage,
   allowed_expected_take NUMERIC,
   allowed_mortality_count NUMERIC,
-  comments VARCHAR(100),
+  comments VARCHAR(200),
 	CONSTRAINT take_and_mortality_species_fkey FOREIGN KEY (species) REFERENCES taxon(code)
 );
 
@@ -544,7 +544,7 @@ CREATE TABLE IF NOT EXISTS catch_raw (
 	qc_completed bool NULL,
 	qc_completed_by int4 NULL,
 	qc_time timestamp NULL,
-	qc_comments varchar(100) NULL,
+	qc_comments varchar(200) NULL,
 	marked_for_release bool NULL,
 	CONSTRAINT catch_raw_capture_run_class_fkey FOREIGN KEY (capture_run_class) REFERENCES run(id),
 	CONSTRAINT catch_raw_capture_run_class_method_fkey FOREIGN KEY (capture_run_class_method) REFERENCES run_code_method(id),
