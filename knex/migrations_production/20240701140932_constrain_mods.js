@@ -4,7 +4,7 @@
  */
 exports.up = function (knex) {
   return knex.raw(`
-    ALTER TABLE catch_raw DROP COLUMN mark_type;
+    ALTER TABLE trap_visit ALTER COLUMN debris_volume_liters TYPE NUMERIC;
   `)
 }
 
@@ -14,6 +14,6 @@ exports.up = function (knex) {
  */
 exports.down = function (knex) {
   return knex.raw(`
-    ALTER TABLE catch_raw ADD mark_type INTEGER references mark_type;
-    `)
+    ALTER TABLE trap_visit ALTER COLUMN debris_volume_liters TYPE INTEGER;
+  `)
 }
