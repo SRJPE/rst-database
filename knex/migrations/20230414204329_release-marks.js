@@ -9,7 +9,7 @@ exports.up = function (knex) {
       release_id INTEGER REFERENCES release,
       mark_type INTEGER references mark_type,
       mark_color INTEGER references mark_color,
-      body_part INTEGER references body_part
+      mark_position INTEGER references body_part
     );
     
     ALTER TABLE release DROP COLUMN mark_color;

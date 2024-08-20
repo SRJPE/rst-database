@@ -13,3 +13,7 @@ env.sh
 
 # Dependency directories
 node_modules/
+
+# knex files
+knex/seeds/*
+!knex/seeds/01_initial_seed.js

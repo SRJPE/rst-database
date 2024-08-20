@@ -98,3 +98,7 @@ FROM
 COPY why_trap_not_functioning (definition)
 FROM
   '/opt/data/seed_data/data/luWhyTrapNotFunctioning.csv' CSV HEADER;
+
+COPY fish_condition (definition)
+FROM
+  '/opt/data/seed_data/data/luFishCondition.csv' CSV HEADER;

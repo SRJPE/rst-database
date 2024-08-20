@@ -188,8 +188,8 @@ CREATE TABLE IF NOT EXISTS personnel (
 -- FINAL ERD VERSION
 CREATE TABLE IF NOT EXISTS program (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    program_name VARCHAR(25),
-    stream_name VARCHAR(25),
+    program_name VARCHAR(100),
+    stream_name VARCHAR(100),
     personnel_lead INTEGER REFERENCES personnel,
     funding_agency INTEGER REFERENCES agency,
     efficiency_protocols_document_link VARCHAR(200),
@@ -296,7 +296,7 @@ CREATE TABLE IF NOT EXISTS trap_visit (
     updated_at TIMESTAMP DEFAULT NOW(),
     qc_completed BOOLEAN,
     qc_completed_at TIMESTAMP,
-    comments VARCHAR(100)
+    comments VARCHAR(200)
 );
 
 CREATE TABLE IF NOT EXISTS trap_coordinates (
@@ -389,7 +389,7 @@ CREATE TABLE IF NOT EXISTS catch_raw (
     qc_completed BOOLEAN,
     qc_completed_by INTEGER REFERENCES personnel,
     qc_time TIMESTAMP,
-    qc_comments VARCHAR(100)
+    qc_comments VARCHAR(200)
 );
 
 -- FINAL ERD VERSION

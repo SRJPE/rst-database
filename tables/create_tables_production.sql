@@ -318,26 +318,26 @@ CREATE TABLE IF NOT EXISTS trap_visit (
 	visit_type_id int4 NULL,
 	trap_location_id int4 NOT NULL,
 	is_paper_entry bool NULL DEFAULT false,
-	trap_visit_time_start timestamp NOT NULL,
-	trap_visit_time_end timestamp NOT NULL,
-	fish_processed int4 NOT NULL,
+	trap_visit_time_start timestamp,
+	trap_visit_time_end timestamp,
+	fish_processed int4,
 	why_fish_not_processed int4 NULL,
 	sample_gear_id int4 NULL,
 	cone_depth numeric NULL,
 	trap_in_thalweg bool NULL,
-	trap_functioning int4 NOT NULL,
+	trap_functioning int4,
 	why_trap_not_functioning int4 NULL,
-	trap_status_at_end int4 NOT NULL DEFAULT 1,
+	trap_status_at_end int4 DEFAULT 1,
 	total_revolutions int4 NULL,
-	rpm_at_start numeric NOT NULL,
-	rpm_at_end numeric NOT NULL,
+	rpm_at_start numeric,
+	rpm_at_end numeric,
 	in_half_cone_configuration bool NULL DEFAULT false,
-	debris_volume_liters int4 NOT NULL,
+	debris_volume_liters int4,
 	created_at timestamp NULL DEFAULT now(),
 	updated_at timestamp NULL DEFAULT now(),
 	qc_completed bool NULL,
 	qc_completed_at timestamp NULL,
-	"comments" varchar(100) NULL,
+	"comments" varchar(200) NULL,
 	CONSTRAINT why_fish_not_processed_check CHECK (((((fish_processed = 3) OR (fish_processed = 4)) AND (why_fish_not_processed IS NOT NULL)) OR ((fish_processed <> 3) AND (fish_processed <> 4)))),
 	CONSTRAINT why_trap_not_functioning_check CHECK (((((trap_functioning = 2) OR (trap_functioning = 3)) AND (why_trap_not_functioning IS NOT NULL)) OR ((trap_functioning <> 2) AND (trap_functioning <> 3)))),
 	CONSTRAINT trap_visit_fish_processed_fkey FOREIGN KEY (fish_processed) REFERENCES fish_processed(id),
@@ -455,7 +455,7 @@ CREATE TABLE IF NOT EXISTS take_and_mortality (
   fish_life_stage INTEGER REFERENCES life_stage,
   allowed_expected_take NUMERIC,
   allowed_mortality_count NUMERIC,
-  comments VARCHAR(100),
+  comments VARCHAR(200),
 	CONSTRAINT take_and_mortality_species_fkey FOREIGN KEY (species) REFERENCES taxon(code)
 );
 
@@ -503,7 +503,7 @@ CREATE TABLE IF NOT EXISTS release_marks (
 	release_id INTEGER REFERENCES release,
 	mark_type INTEGER references mark_type,
 	mark_color INTEGER references mark_color,
-	body_part INTEGER references body_part
+	mark_position INTEGER references body_part
 );
 
 
@@ -544,7 +544,7 @@ CREATE TABLE IF NOT EXISTS catch_raw (
 	qc_completed bool NULL,
 	qc_completed_by int4 NULL,
 	qc_time timestamp NULL,
-	qc_comments varchar(100) NULL,
+	qc_comments varchar(200) NULL,
 	marked_for_release bool NULL,
 	CONSTRAINT catch_raw_capture_run_class_fkey FOREIGN KEY (capture_run_class) REFERENCES run(id),
 	CONSTRAINT catch_raw_capture_run_class_method_fkey FOREIGN KEY (capture_run_class_method) REFERENCES run_code_method(id),

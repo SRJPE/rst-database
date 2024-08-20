@@ -12,7 +12,7 @@ exports.up = function (knex) {
       fish_life_stage INTEGER REFERENCES life_stage,
       allowed_expected_take NUMERIC,
       allowed_mortality_count NUMERIC,
-      comments VARCHAR(100)
+      comments VARCHAR(200)
     );
 
     ALTER TABLE permit_info DROP COLUMN species;
