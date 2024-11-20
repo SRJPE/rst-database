@@ -328,7 +328,7 @@ CREATE TABLE IF NOT EXISTS trap_visit (
 	trap_functioning int4,
 	why_trap_not_functioning int4 NULL,
 	trap_status_at_end int4 DEFAULT 1,
-	total_revolutions int4 NULL,
+	total_revolutions numeric NULL,
 	rpm_at_start numeric,
 	rpm_at_end numeric,
 	in_half_cone_configuration bool NULL DEFAULT false,
