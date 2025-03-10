@@ -59,6 +59,14 @@ exports.up = function (knex) {
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
       updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
+
+    CREATE TABLE IF NOT EXISTS ysi_num (
+      id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+      code varchar(10) NOT NULL,
+      description text NOT NULL,
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+      updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
   `)
 }
 
