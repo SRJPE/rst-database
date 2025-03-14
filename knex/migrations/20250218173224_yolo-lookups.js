@@ -83,5 +83,6 @@ exports.down = function (knex) {
       DROP TABLE IF EXISTS weather_code CASCADE;
       DROP TABLE IF EXISTS substrate CASCADE;
       DROP TABLE IF EXISTS gear_status CASCADE;
+      DROP TABLE IF EXISTS ysi_num CASCADE;
   `)
 }
