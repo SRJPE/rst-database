@@ -10,6 +10,11 @@ exports.up = function (knex) {
     ALTER TABLE trap_locations ADD COLUMN equipment_id INTEGER references equipment;
 
     ALTER TABLE program_fields ADD COLUMN equipment_id INTEGER references equipment;
+
+    ALTER TABLE trap_visit ADD COLUMN length NUMERIC NULL;
+    ALTER TABLE trap_visit ADD COLUMN width NUMERIC NULL;
+    ALTER TABLE trap_visit ADD COLUMN depth NUMERIC NULL;
+    ALTER TABLE trap_visit ADD COLUMN substrate INTEGER REFERENCES substrate;
     `)
 }
 
