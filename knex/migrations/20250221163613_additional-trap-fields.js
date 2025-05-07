@@ -13,7 +13,7 @@ exports.up = function (knex) {
     ALTER TABLE trap_visit ADD COLUMN flow_direction INTEGER REFERENCES flow_direction;
     ALTER TABLE trap_visit ADD COLUMN weather_code INTEGER REFERENCES weather_code;
 
-    CREATE TYPE field_type_enum AS ENUM ('input', 'select', 'multi-select', 'radio', 'checkbox', 'textarea');
+    CREATE TYPE field_type_enum AS ENUM ('input', 'select', 'multi-select', 'radio', 'checkbox', 'textarea', 'datetime');
     CREATE TYPE form_section_enum AS ENUM ('Visit Setup', 'Trap Operations', 'Fish Processing', 'Fish Input', 'Trap Post-Processing');
 
 
@@ -51,7 +51,7 @@ exports.down = function (knex) {
 
     DROP TABLE IF EXISTS form_field CASCADE;
     DROP TABLE IF EXISTS program_fields CASCADE;
-    DROP TYPE IF EXISTS field_type_enum;
-    DROP TYPE IF EXISTS form_section_enum;
+    DROP TYPE IF EXISTS field_type_enum CASCADE;
+    DROP TYPE IF EXISTS form_section_enum CASCADE;
     `)
 }
