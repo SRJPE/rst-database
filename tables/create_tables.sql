@@ -34,6 +34,8 @@ CREATE TABLE IF NOT EXISTS taxon (
     updated_at TIMESTAMP DEFAULT NOW()
 );
 
+
+
 CREATE TABLE IF NOT EXISTS listing_unit (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     definition VARCHAR(100),
@@ -454,3 +456,4 @@ CREATE TABLE IF NOT EXISTS existing_marks (
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP DEFAULT NOW()
 );
+

@@ -176,6 +176,13 @@ CREATE TABLE IF NOT EXISTS taxon (
 );
 
 
+CREATE TABLE IF NOT EXISTS taxon_abbreviation (
+    id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    taxon_code VARCHAR(10) REFERENCES taxon (code),
+    abbreviation_code VARCHAR(10) 
+);
+
+
 -- trap_functionality definition
 
 CREATE TABLE IF NOT EXISTS trap_functionality (
