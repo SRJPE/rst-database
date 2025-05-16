@@ -291,7 +291,7 @@ CREATE TABLE IF NOT EXISTS trap_locations (
 	program_id int4 NULL,
 	data_recorder_id int4 NULL,
 	data_recorder_agency_id int4 NULL,
-	site_name varchar(50) NULL,
+	site_name varchar(100) NULL,
 	cone_size_ft numeric NULL,
 	x_coord numeric NULL,
 	y_coord numeric NULL,
@@ -435,7 +435,7 @@ CREATE TABLE IF NOT EXISTS permit_info (
 CREATE TABLE IF NOT EXISTS release_site (
 	id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
 	trap_locations_id int4 NULL,
-	release_site_name varchar(50) NULL,
+	release_site_name varchar(100) NULL,
 	release_site_x_coord numeric NULL,
 	release_site_y_coord numeric NULL,
 	release_site_coordinate_system varchar(50) NULL,

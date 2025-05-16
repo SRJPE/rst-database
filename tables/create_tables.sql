@@ -34,6 +34,8 @@ CREATE TABLE IF NOT EXISTS taxon (
     updated_at TIMESTAMP DEFAULT NOW()
 );
 
+
+
 CREATE TABLE IF NOT EXISTS listing_unit (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     definition VARCHAR(100),
@@ -256,7 +258,7 @@ CREATE TABLE IF NOT EXISTS trap_locations (
     program_id INTEGER REFERENCES program,
     data_recorder_id INTEGER REFERENCES personnel,
     data_recorder_agency_id INTEGER REFERENCES agency,
-    site_name VARCHAR(50),
+    site_name VARCHAR(100),
     cone_size_ft NUMERIC,
     x_coord NUMERIC,
     y_coord NUMERIC,
@@ -330,7 +332,7 @@ CREATE TABLE IF NOT EXISTS trap_visit_environmental (
 CREATE TABLE IF NOT EXISTS release_site (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     trap_locations_id INTEGER REFERENCES trap_locations,
-    release_site_name VARCHAR(50),
+    release_site_name VARCHAR(100),
     release_site_x_coord NUMERIC,
     release_site_y_coord NUMERIC,
     release_site_coordinate_system VARCHAR(50),
@@ -454,3 +456,4 @@ CREATE TABLE IF NOT EXISTS existing_marks (
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP DEFAULT NOW()
 );
+
