@@ -14,7 +14,7 @@ exports.up = function (knex) {
     ALTER TABLE trap_visit ADD COLUMN weather_code INTEGER REFERENCES weather_code;
 
     CREATE TYPE field_type_enum AS ENUM ('input', 'select', 'multi-select', 'radio', 'checkbox', 'textarea', 'datetime');
-    CREATE TYPE form_section_enum AS ENUM ('Visit Setup', 'Trap Operations', 'Fish Processing', 'Fish Input', 'Trap Post-Processing');
+    CREATE TYPE form_section_enum AS ENUM ('Visit Setup', 'Trap Operations', 'Fish Processing', 'Fish Input', 'Trap Post-Processing', 'Incomplete Sections');
 
 
     CREATE TABLE IF NOT EXISTS form_field (

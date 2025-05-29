@@ -4,12 +4,8 @@
  */
 exports.up = function (knex) {
   return knex.raw(`
-     CREATE TABLE IF NOT EXISTS taxon_abbreviation (
-      id SERIAL PRIMARY KEY,
-      taxon_code VARCHAR(10) REFERENCES taxon(code),
-      abbreviation_code VARCHAR(10)
-    );
-  `)
+    ALTER TABLE form_field ADD COLUMN is_environmental_field BOOLEAN NULL DEFAULT FALSE;
+    `)
 }
 
 /**
@@ -18,6 +14,6 @@ exports.up = function (knex) {
  */
 exports.down = function (knex) {
   return knex.raw(`
-    DROP TABLE IF EXISTS taxon_abbreviation CASCADE;
-  `)
+    ALTER TABLE form_field DROP COLUMN is_environmental_field;
+    `)
 }
