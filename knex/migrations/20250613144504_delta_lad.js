@@ -39,7 +39,7 @@ exports.up = function (knex) {
 exports.down = function (knex) {
   return knex.raw(`
     DROP TABLE IF EXISTS length_at_date_delta CASCADE;
-    DROP TABLE IF EXISTS length_at_date_river CASCADE;
+    DROP TABLE IF EXISTS length_at_date CASCADE;
     ALTER TABLE length_at_date_river RENAME TO length_at_date;
 
     ALTER TABLE program DROP COLUMN lad_model;
