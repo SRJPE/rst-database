@@ -368,9 +368,9 @@ CREATE TABLE IF NOT EXISTS release_crew (
 -- FINAL ERD VERSION
 CREATE TABLE IF NOT EXISTS catch_raw (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    program_id INTEGER REFERENCES program,
-    trap_visit_id INTEGER REFERENCES trap_visit,
-    taxon_code VARCHAR(10) REFERENCES taxon (code),
+    program_id INTEGER REFERENCES program NOT NULL,
+    trap_visit_id INTEGER REFERENCES trap_visit NOT NULL,
+    taxon_code VARCHAR(10) REFERENCES taxon (code) NOT NULL,
     capture_run_class INTEGER REFERENCES run,
     capture_run_class_method INTEGER REFERENCES run_code_method,
     mark_type INTEGER REFERENCES mark_type,

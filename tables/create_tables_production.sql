@@ -521,9 +521,9 @@ CREATE TABLE IF NOT EXISTS release_crew (
 
 CREATE TABLE IF NOT EXISTS catch_raw (
 	id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-	program_id int4 NULL,
-	trap_visit_id int4 NULL,
-	taxon_code varchar(10) NULL,
+	program_id int4 NOT NULL,
+	trap_visit_id int4 NOT NULL,
+	taxon_code varchar(10) NOT NULL,
 	capture_run_class int4 NULL,
 	capture_run_class_method int4 NULL,
 	mark_type int4 NULL,
