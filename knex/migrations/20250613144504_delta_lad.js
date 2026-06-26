@@ -6,7 +6,7 @@ exports.up = function (knex) {
   return knex.raw(`
     CREATE TABLE IF NOT EXISTS length_at_date_delta (
       id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-      lad_date date,
+      lad_date text,
       fall_min_1 integer,
       fall_max_1 integer,
       spring_min_1 integer,
