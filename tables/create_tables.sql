@@ -356,7 +356,10 @@ CREATE TABLE IF NOT EXISTS release (
     total_wild_fish_released INTEGER,
     total_hatchery_fish_released INTEGER,
     total_wild_fish_dead INTEGER,
-    total_hatchery_fish_dead INTEGER
+    total_hatchery_fish_dead INTEGER,
+    qc_completed BOOLEAN,
+    qc_completed_by INTEGER REFERENCES personnel,
+    qc_time TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS release_crew (
@@ -431,7 +434,10 @@ CREATE TABLE IF NOT EXISTS mark_applied (
     mark_code VARCHAR(25),
     comments VARCHAR(500),
     created_at TIMESTAMP DEFAULT NOW(),
-    updated_at TIMESTAMP DEFAULT NOW()
+    updated_at TIMESTAMP DEFAULT NOW(),
+    qc_completed BOOLEAN,
+    qc_completed_by INTEGER REFERENCES personnel,
+    qc_time TIMESTAMP
 );
 
 -- FINAL ERD VERSION
@@ -454,6 +460,9 @@ CREATE TABLE IF NOT EXISTS existing_marks (
     mark_color_id INTEGER REFERENCES mark_color,
     mark_code VARCHAR(25),
     created_at TIMESTAMP DEFAULT NOW(),
-    updated_at TIMESTAMP DEFAULT NOW()
+    updated_at TIMESTAMP DEFAULT NOW(),
+    qc_completed BOOLEAN,
+    qc_completed_by INTEGER REFERENCES personnel,
+    qc_time TIMESTAMP
 );
 

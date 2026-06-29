@@ -490,10 +490,14 @@ CREATE TABLE IF NOT EXISTS release (
 	total_hatchery_fish_released int4 NULL,
 	total_wild_fish_dead int4 NULL,
 	total_hatchery_fish_dead int4 NULL,
+	qc_completed bool NULL,
+	qc_completed_by int4 NULL,
+	qc_time timestamp NULL,
 	CONSTRAINT release_program_id_fkey FOREIGN KEY (program_id) REFERENCES program(id),
 	CONSTRAINT release_release_purpose_id_fkey FOREIGN KEY (release_purpose_id) REFERENCES release_purpose(id),
 	CONSTRAINT release_release_site_id_fkey FOREIGN KEY (release_site_id) REFERENCES release_site(id),
-	CONSTRAINT release_run_hatchery_fish_fkey FOREIGN KEY (run_hatchery_fish) REFERENCES run(id)
+	CONSTRAINT release_run_hatchery_fish_fkey FOREIGN KEY (run_hatchery_fish) REFERENCES run(id),
+	CONSTRAINT release_qc_completed_by_fkey FOREIGN KEY (qc_completed_by) REFERENCES personnel(id)
 );
 
 -- release_marks
@@ -587,11 +591,15 @@ CREATE TABLE IF NOT EXISTS mark_applied (
 	"comments" varchar(500) NULL,
 	created_at timestamp NULL DEFAULT now(),
 	updated_at timestamp NULL DEFAULT now(),
+	qc_completed bool NULL,
+	qc_completed_by int4 NULL,
+	qc_time timestamp NULL,
 	CONSTRAINT mark_applied_catch_raw_id_fkey FOREIGN KEY (catch_raw_id) REFERENCES catch_raw(id),
 	CONSTRAINT mark_applied_mark_color_id_fkey FOREIGN KEY (mark_color_id) REFERENCES mark_color(id),
 	CONSTRAINT mark_applied_mark_position_id_fkey FOREIGN KEY (mark_position_id) REFERENCES body_part(id),
 	CONSTRAINT mark_applied_mark_type_id_fkey FOREIGN KEY (mark_type_id) REFERENCES mark_type(id),
-	CONSTRAINT mark_applied_program_id_fkey FOREIGN KEY (program_id) REFERENCES program(id)
+	CONSTRAINT mark_applied_program_id_fkey FOREIGN KEY (program_id) REFERENCES program(id),
+	CONSTRAINT mark_applied_qc_completed_by_fkey FOREIGN KEY (qc_completed_by) REFERENCES personnel(id)
 );
 
 
@@ -621,6 +629,9 @@ CREATE TABLE IF NOT EXISTS existing_marks (
 	mark_code varchar(25) NULL,
 	created_at timestamp NULL DEFAULT now(),
 	updated_at timestamp NULL DEFAULT now(),
+	qc_completed bool NULL,
+	qc_completed_by int4 NULL,
+	qc_time timestamp NULL,
 	CONSTRAINT existing_marks_catch_raw_id_fkey FOREIGN KEY (catch_raw_id) REFERENCES catch_raw(id),
 	CONSTRAINT existing_marks_fish_id_fkey FOREIGN KEY (fish_id) REFERENCES taxon(code),
 	CONSTRAINT existing_marks_mark_applied_id_fkey FOREIGN KEY (mark_applied_id) REFERENCES mark_applied(id),
@@ -628,7 +639,8 @@ CREATE TABLE IF NOT EXISTS existing_marks (
 	CONSTRAINT existing_marks_mark_position_id_fkey FOREIGN KEY (mark_position_id) REFERENCES body_part(id),
 	CONSTRAINT existing_marks_mark_type_id_fkey FOREIGN KEY (mark_type_id) REFERENCES mark_type(id),
 	CONSTRAINT existing_marks_program_id_fkey FOREIGN KEY (program_id) REFERENCES program(id),
-	CONSTRAINT existing_marks_release_id_fkey FOREIGN KEY (release_id) REFERENCES release(id)
+	CONSTRAINT existing_marks_release_id_fkey FOREIGN KEY (release_id) REFERENCES release(id),
+	CONSTRAINT existing_marks_qc_completed_by_fkey FOREIGN KEY (qc_completed_by) REFERENCES personnel(id)
 );
 
 
