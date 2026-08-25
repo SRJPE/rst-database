@@ -322,9 +322,9 @@ CREATE TABLE IF NOT EXISTS trap_visit_crew (
 CREATE TABLE IF NOT EXISTS trap_visit_environmental (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     trap_visit_id INTEGER REFERENCES trap_visit,
-    measure_name VARCHAR(50),
+    measure_name VARCHAR(100),
     measure_value_numeric NUMERIC,
-    measure_value_text VARCHAR(100),
+    measure_value_text VARCHAR(255),
     measure_unit INTEGER REFERENCES unit
 );
 

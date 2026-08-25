@@ -369,9 +369,9 @@ CREATE TABLE IF NOT EXISTS trap_visit_crew (
 CREATE TABLE IF NOT EXISTS trap_visit_environmental (
 	id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
 	trap_visit_id int4 NULL,
-	measure_name varchar(50) NULL,
+	measure_name varchar(100) NULL,
 	measure_value_numeric numeric NULL,
-	measure_value_text varchar(100) NULL,
+	measure_value_text varchar(255) NULL,
 	measure_unit int4 NULL,
 	CONSTRAINT trap_visit_environmental_measure_unit_fkey FOREIGN KEY (measure_unit) REFERENCES unit(id),
 	CONSTRAINT trap_visit_environmental_trap_visit_id_fkey FOREIGN KEY (trap_visit_id) REFERENCES trap_visit(id)
