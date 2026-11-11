@@ -10,6 +10,9 @@ env.sh
 .env.test
 .env.*
 
+# Azure Functions local settings (contains local credentials, never commit)
+local.settings.json
+
 
 # Dependency directories
 node_modules/
