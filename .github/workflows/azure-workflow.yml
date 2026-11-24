@@ -1,10 +1,13 @@
 # .github/workflows/azure-workflow.yml
+#
+# push-only: this runs tables/create_tables.sql against the *production*
+# Postgres server. It used to also trigger on pull_request, which ran
+# untrusted/unreviewed SQL against prod before a PR was ever approved —
+# now it only runs after a change has actually been merged to main (and,
+# combined with main's branch protection, after review).
 on:
   push:
     branches:
-      - main
-  pull_request:
-    branches: 
       - main
 
 jobs:
